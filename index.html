@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneAD - 智能品牌行銷科技</title>
+    <meta name="description" content="OneAD 提供最先進的 AI 行銷科技解決方案，包含 Super DSP、Audience AI、Context AI 等，協助品牌達成行銷目標。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">OneAD</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#about">關於我們 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">OneAD Story</a></li>
+                        <li><a href="#">人才與文化</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#solutions">行銷目標與解方 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">產品概覽</a></li>
+                        <li><a href="#">Branding+</a></li>
+                        <li><a href="#">Traffic+</a></li>
+                        <li><a href="#">Last Mile+</a></li>
+                        <li><a href="#">EC+</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#ai-tech">AI 技術與洞察 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">情感連結科學</a></li>
+                        <li><a href="#">Audience AI</a></li>
+                        <li><a href="#">Context AI</a></li>
+                        <li><a href="#">Attention Impact AI</a></li>
+                        <li><a href="#">Creative AI</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#platform">平台服務 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Super DSP</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#cases">精彩案例 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">保健產業</a></li>
+                        <li><a href="#">汽車產業</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#knowledge">知識與媒體中心 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">OneAD 動態</a></li>
+                        <li><a href="#">果實講堂</a></li>
+                        <li><a href="#">白皮書</a></li>
+                        <li><a href="#">研討會 & 活動</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#partners">成為合作夥伴 <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">廣告主</a></li>
+                        <li><a href="#">經銷商</a></li>
+                        <li><a href="#">發佈商/技術商</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact" class="btn-primary">聯絡我們</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <canvas id="halftoneCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1 class="hero-title fade-in-up">數據驅動，AI 賦能<br>重新定義品牌行銷</h1>
+            <p class="hero-subtitle fade-in-up delay-1">OneAD 運用最先進的 AI 技術與大數據洞察，為您的品牌創造真實的連結與影響力。</p>
+            <div class="hero-cta fade-in-up delay-2">
+                <a href="#solutions" class="btn-primary large">探索解決方案</a>
+                <a href="#contact" class="btn-secondary large">立即諮詢</a>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <div class="mouse"></div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">關於我們</h2>
+                <p class="section-desc">致力於連結品牌與消費者，創造最有價值的數位廣告體驗</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="icon-box"><i class="fas fa-history"></i></div>
+                    <h3>OneAD Story</h3>
+                    <p>十年的專注與創新，我們始終走在數位廣告科技的最前沿，為客戶提供最前瞻的解決方案。</p>
+                    <a href="#" class="text-link">了解更多 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="about-card">
+                    <div class="icon-box"><i class="fas fa-users"></i></div>
+                    <h3>人才與文化</h3>
+                    <p>我們擁有一群充滿熱情與創意的專業人才，共同打造開放、協作且追求卓越的企業文化。</p>
+                    <a href="#" class="text-link">加入我們 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="section solutions-section bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">行銷目標與解方</h2>
+                <p class="section-desc">全方位的行銷漏斗解決方案，滿足您不同階段的品牌需求</p>
+            </div>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="card-image branding-img"></div>
+                    <div class="card-content">
+                        <h3>Branding+</h3>
+                        <p>極大化品牌聲量，建立深刻的品牌印象。</p>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="card-image traffic-img"></div>
+                    <div class="card-content">
+                        <h3>Traffic+</h3>
+                        <p>精準引流，為您的網站帶來高品質流量。</p>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="card-image lastmile-img"></div>
+                    <div class="card-content">
+                        <h3>Last Mile+</h3>
+                        <p>強化轉換前的最後一哩路，提升購買意願。</p>
+                    </div>
+                </div>
+                <div class="solution-card">
+                    <div class="card-image ec-img"></div>
+                    <div class="card-content">
+                        <h3>EC+</h3>
+                        <p>專為電商打造的成效型解決方案，直接驅動銷售。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tech Section -->
+    <section id="ai-tech" class="section ai-section dark-theme">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title text-white">AI 技術與洞察</h2>
+                <p class="section-desc text-white-50">運用尖端 AI 科技，精準鎖定受眾，優化廣告成效</p>
+            </div>
+            <div class="ai-features">
+                <div class="ai-feature-item">
+                    <div class="ai-icon"><i class="fas fa-brain"></i></div>
+                    <h4>Audience AI</h4>
+                    <p>智能受眾分析，精準描繪目標客群輪廓。</p>
+                </div>
+                <div class="ai-feature-item">
+                    <div class="ai-icon"><i class="fas fa-globe"></i></div>
+                    <h4>Context AI</h4>
+                    <p>語意環境分析，確保廣告出現在最相關的內容中。</p>
+                </div>
+                <div class="ai-feature-item">
+                    <div class="ai-icon"><i class="fas fa-eye"></i></div>
+                    <h4>Attention Impact AI</h4>
+                    <p>注意力預測模型，最大化廣告的視覺衝擊力。</p>
+                </div>
+                <div class="ai-feature-item">
+                    <div class="ai-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h4>Creative AI</h4>
+                    <p>智能創意生成，自動優化廣告素材表現。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section id="platform" class="section platform-section">
+        <div class="container">
+            <div class="platform-showcase">
+                <div class="platform-text">
+                    <span class="badge">核心平台</span>
+                    <h2>Super DSP</h2>
+                    <p>OneAD 獨家開發的跨網廣告投放平台，整合多元媒體渠道，透過單一介面即可輕鬆管理跨平台的廣告活動。具備強大的數據分析與即時優化功能，助您掌握每一分預算的效益。</p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> 跨網域受眾鎖定</li>
+                        <li><i class="fas fa-check-circle"></i> 即時競價優化</li>
+                        <li><i class="fas fa-check-circle"></i> 視覺化數據報表</li>
+                    </ul>
+                    <a href="#" class="btn-primary mt-4">了解 Super DSP</a>
+                </div>
+                <div class="platform-visual">
+                    <!-- Abstract UI representation -->
+                    <div class="dsp-ui-mockup">
+                        <div class="ui-header"></div>
+                        <div class="ui-body">
+                            <div class="ui-sidebar"></div>
+                            <div class="ui-content">
+                                <div class="ui-graph"></div>
+                                <div class="ui-cards">
+                                    <div class="ui-card"></div>
+                                    <div class="ui-card"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="cases" class="section cases-section bg-light">
+        <div class="container">
+            <div class="section-header flex-header">
+                <div>
+                    <h2 class="section-title">精彩案例</h2>
+                    <p class="section-desc">看看我們如何協助各產業客戶達成行銷目標</p>
+                </div>
+                <a href="#" class="btn-outline">查看更多案例</a>
+            </div>
+            <div class="cases-slider">
+                <div class="case-card">
+                    <div class="case-image health-case"></div>
+                    <div class="case-info">
+                        <span class="case-category">保健產業</span>
+                        <h3>知名保健品牌年度營銷</h3>
+                        <p>透過 Audience AI 精準鎖定健康關注族群，轉換率提升 150%。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image auto-case"></div>
+                    <div class="case-info">
+                        <span class="case-category">汽車產業</span>
+                        <h3>豪華車款新車上市</h3>
+                        <p>運用 Branding+ 策略，在短時間內創造極大化品牌聲量與預約試駕。</p>
+                    </div>
+                </div>
+                <div class="case-card">
+                    <div class="case-image retail-case"></div>
+                    <div class="case-info">
+                        <span class="case-category">零售產業</span>
+                        <h3>連鎖通路週年慶活動</h3>
+                        <p>結合 Traffic+ 與 LBS 技術，成功引導線上流量至線下門市消費。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Knowledge Center -->
+    <section id="knowledge" class="section knowledge-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">知識與媒體中心</h2>
+            </div>
+            <div class="knowledge-grid">
+                <article class="news-item">
+                    <div class="news-date">2023.10.24</div>
+                    <div class="news-tag">OneAD 動態</div>
+                    <h3>OneAD 榮獲年度最佳行銷科技公司大獎</h3>
+                    <a href="#" class="read-more">閱讀全文</a>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">2023.10.15</div>
+                    <div class="news-tag">果實講堂</div>
+                    <h3>Cookie 退場後的數位廣告新策略</h3>
+                    <a href="#" class="read-more">閱讀全文</a>
+                </article>
+                <article class="news-item">
+                    <div class="news-date">2023.09.28</div>
+                    <div class="news-tag">白皮書</div>
+                    <h3>2024 數位行銷趨勢報告書發布</h3>
+                    <a href="#" class="read-more">閱讀全文</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="section partners-section bg-dark text-white">
+        <div class="container text-center">
+            <h2 class="section-title text-white">成為合作夥伴</h2>
+            <p class="mb-5">無論您是廣告主、經銷商還是發佈商，我們都期待與您共創價值</p>
+            <div class="partners-cta-grid">
+                <div class="partner-cta-box">
+                    <h3>廣告主</h3>
+                    <p>尋求最有效的行銷解決方案？</p>
+                    <a href="#" class="btn-text-white">立即聯繫 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="partner-cta-box">
+                    <h3>經銷商</h3>
+                    <p>希望擴充您的產品服務線？</p>
+                    <a href="#" class="btn-text-white">加入經銷 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="partner-cta-box">
+                    <h3>發佈商/技術商</h3>
+                    <p>想要最大化您的流量變現？</p>
+                    <a href="#" class="btn-text-white">技術串接 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">OneAD</a>
+                    <p>連結品牌與消費者的最佳夥伴</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>關於我們</h4>
+                    <ul>
+                        <li><a href="#">OneAD Story</a></li>
+                        <li><a href="#">人才與文化</a></li>
+                        <li><a href="#">聯絡我們</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>解決方案</h4>
+                    <ul>
+                        <li><a href="#">Branding+</a></li>
+                        <li><a href="#">Traffic+</a></li>
+                        <li><a href="#">Last Mile+</a></li>
+                        <li><a href="#">EC+</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>訂閱電子報</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="您的 Email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 OneAD. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">隱私權聲明</a>
+                    <a href="#">防詐騙聲明</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
