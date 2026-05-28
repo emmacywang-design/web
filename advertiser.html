@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>廣告主 | OneAD</title>
+  <style>
+    :root {
+      --orange: #FF6546;
+      --dark: #111111;
+      --gray: #666666;
+      --light: #999999;
+      --bg-light: #f6f5f3;
+      --white: #ffffff;
+      --max-w: 1200px;
+
+      /* Design System Tokens (對齊 design-system.html) */
+      --color-brand: #1789FA;
+      --color-brand-hover: #0061CC;
+      --color-brand-active: #00428F;
+      --color-accent: var(--orange);
+      --color-accent-hover: #E5512F;
+      --color-accent-active: #B33B1F;
+      --color-accent-subtle: #FFF0EC;
+      --color-surface: var(--white);
+      --color-background-subtle: #F6F5F3;
+      --color-border: #D9D8D5;
+      --color-text-primary: var(--dark);
+      --color-text-inverse: var(--white);
+      --color-text-disabled: #B8B6B2;
+      --color-focus-brand: rgba(23, 137, 250, 0.35);
+      --color-focus-accent: rgba(255, 101, 70, 0.35);
+      --radius-pill: 100px;
+      --font-family-heading: 'Nunito Sans', 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+      --duration-fast: 150ms;
+      --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── BUTTON (對齊 design-system.html) ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 32px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-family-heading);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--duration-fast) var(--easing-standard);
+    }
+
+    .btn--primary {
+      background: var(--color-brand);
+      color: var(--color-text-inverse);
+      border-color: var(--color-brand);
+    }
+    .btn--primary:hover { background: var(--color-brand-hover); border-color: var(--color-brand-hover); }
+    .btn--primary.is-active { background: var(--color-brand-active); border-color: var(--color-brand-active); }
+    .btn--primary.is-focus { box-shadow: 0 0 0 3px var(--color-focus-brand); }
+
+    .btn--accent {
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
+      border-color: var(--color-accent);
+    }
+    .btn--accent:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+    .btn--accent.is-active { background: var(--color-accent-active); border-color: var(--color-accent-active); }
+    .btn--accent.is-focus { box-shadow: 0 0 0 3px var(--color-focus-accent); }
+
+    .btn--secondary {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      border-color: var(--color-border);
+    }
+    .btn--secondary:hover { background: var(--color-background-subtle); }
+    .btn--secondary.is-focus { box-shadow: 0 0 0 3px var(--color-focus-brand); }
+
+    .btn--ghost {
+      background: transparent;
+      color: var(--color-accent);
+      border-color: transparent;
+    }
+    .btn--ghost:hover { background: var(--color-accent-subtle); }
+    .btn--ghost.is-focus { box-shadow: 0 0 0 3px var(--color-focus-accent); }
+
+    .btn--disabled {
+      background: var(--color-background-subtle);
+      color: var(--color-text-disabled);
+      border-color: transparent;
+      cursor: not-allowed;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar-outer {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 12px 24px;
+      pointer-events: none;
+    }
+
+    .navbar {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 960px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar__logo img {
+      display: block;
+      width: 130px;
+      height: 20px;
+    }
+
+    .navbar__links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .navbar__links a {
+      display: block;
+      font-size: 15.6px;
+      color: #141414;
+      letter-spacing: -0.1px;
+      line-height: 1;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+
+    .navbar__links a:hover {
+      color: var(--orange);
+    }
+
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .navbar__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #141414;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .navbar__hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .navbar__hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar__hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── HERO ── */
+    .ad-hero {
+      padding: 80px 0 96px;
+    }
+
+    .ad-hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .ad-hero__photo {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .ad-hero__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ad-hero__title {
+      font-size: clamp(32px, 3.4vw, 44px);
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+
+    .ad-hero__body {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.95;
+      margin-bottom: 32px;
+    }
+
+    /* ── THREE CORES ── */
+    .cores {
+      padding: 96px 0;
+      background: var(--bg-light);
+    }
+
+    .cores__heading {
+      font-size: clamp(34px, 4.2vw, 52px);
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 56px;
+      text-align: center;
+    }
+
+    .cores__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .core {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 14px rgba(0, 0, 0, .07);
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+    }
+
+    .core:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, .12);
+    }
+
+    .core__body {
+      padding: 40px 28px 24px;
+      position: relative;
+    }
+
+    .core__num {
+      position: absolute;
+      top: 8px;
+      left: 18px;
+      font-size: 88px;
+      font-weight: 900;
+      color: rgba(255, 101, 70, .25);
+      line-height: 1;
+      font-family: 'Arial Black', Arial, sans-serif;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .core__title {
+      position: relative;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
+    }
+
+    .core__subtitle {
+      position: relative;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .core__desc {
+      position: relative;
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.85;
+    }
+
+    .core__desc strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .core__img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
+    .core__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── BRAND WALL ── */
+    .brands {
+      padding: 96px 0;
+      overflow: hidden;
+    }
+
+    .brands__heading {
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .brand-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow: hidden;
+    }
+
+    .brand-row {
+      display: flex;
+      width: max-content;
+      gap: 18px;
+      animation: scrollLeft 38s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .brand-row--reverse {
+      animation: scrollRight 38s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .brand-row--slow {
+      animation-duration: 50s;
+    }
+
+    /* 暫停在不同位置,做出錯落滿版效果 */
+    .brand-rows .brand-row:nth-child(1) { animation-delay: -6s; }
+    .brand-rows .brand-row:nth-child(2) { animation-delay: -22s; }
+    .brand-rows .brand-row:nth-child(3) { animation-delay: -14s; }
+
+    @keyframes scrollLeft {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes scrollRight {
+      0%   { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    .pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 26px;
+      background: #fafaf8;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .06), inset 0 1px 0 rgba(255, 255, 255, .8);
+      white-space: nowrap;
+    }
+
+    .pill__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .pill__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* 文字 fallback(沒有 logo 檔的品牌) */
+    .pill__icon--yichenjing {
+      background: #66bb6a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #fff;
+      border-top: 1px solid #c6d1dd;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      gap: 24px;
+    }
+
+    .footer__left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer__logo-onead img {
+      display: block;
+      width: 156px;
+      height: 24px;
+    }
+
+    .footer__copyright {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #616e84;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .footer__right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    .footer__links-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer__links-row a {
+      font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3b3e40;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer__links-row a:hover {
+      text-decoration: underline;
+    }
+
+    .footer__logo-onedata img {
+      display: block;
+      width: 138px;
+      height: 16px;
+    }
+
+    .footer__social-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer__follow-label {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      color: #616e84;
+      line-height: 1.5;
+      white-space: nowrap;
+      width: 70px;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      text-decoration: none;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .social-icon--fb {
+      background: #1877f2;
+      border-radius: 64px;
+    }
+
+    .social-icon--linkedin {
+      background: #006699;
+      border-radius: 4px;
+    }
+
+    .social-icon--line {
+      background: #3ace01;
+      border-radius: 4px;
+    }
+
+    .social-icon img {
+      display: block;
+      position: absolute;
+      object-fit: contain;
+    }
+
+    .social-icon--fb img {
+      top: 19.53%;
+      left: 29.49%;
+      width: 43%;
+      height: 80.47%;
+    }
+
+    .social-icon--linkedin img {
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 48.84%;
+    }
+
+    .social-icon--line img {
+      top: 20.83%;
+      left: 16.67%;
+      width: 66.66%;
+      height: 62.45%;
+    }
+
+    /* ── RWD ── */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 32px;
+      }
+
+      .navbar-outer {
+        padding: 12px 16px;
+      }
+
+      .ad-hero__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .ad-hero__photo {
+        height: 340px;
+      }
+
+      .cores__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .navbar-outer {
+        padding: 10px 12px;
+      }
+
+      .navbar {
+        padding: 0 18px;
+        position: relative;
+        border-radius: 12px;
+      }
+
+      .navbar__hamburger {
+        display: flex;
+      }
+
+      .navbar__links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+      }
+
+      .navbar__links.open {
+        display: flex;
+      }
+
+      .navbar__links a {
+        padding: 12px 20px;
+        font-size: 15px;
+      }
+
+      .ad-hero {
+        padding: 48px 0 56px;
+      }
+
+      .ad-hero__photo {
+        height: 240px;
+      }
+
+      .cores {
+        padding: 56px 0;
+      }
+
+      .brands {
+        padding: 56px 0;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 0;
+      }
+
+      .footer__right {
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .footer__links-row {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <header class="navbar-outer">
+    <nav class="navbar" id="navbar">
+      <a href="#" class="navbar__logo">
+        <img src="images/logo.svg" alt="ONEAD" height="20">
+      </a>
+      <button class="navbar__hamburger" id="hamburger" aria-label="選單">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#">產品與解方</a></li>
+        <li><a href="#">精彩案例</a></li>
+        <li><a href="#">成為合作夥伴</a></li>
+        <li><a href="#">知識與媒體中心</a></li>
+        <li><a href="#">關於 OneAD</a></li>
+        <li><a href="#">聯繫我們</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="ad-hero">
+    <div class="container">
+      <div class="ad-hero__grid">
+        <div class="ad-hero__photo">
+          <img src="images/Advertisers-hero.png" alt="OneAD 合作客戶">
+        </div>
+        <div class="ad-hero__content">
+          <h1 class="ad-hero__title">
+            成為 OneAD 合作客戶<br>
+            啟動 AI 驅動的增長引擎，重塑行銷效益
+          </h1>
+          <p class="ad-hero__body">
+            身為台灣領先的 AI 廣告科技大腦，OneAD 運用運算智能與深度機器學習，將碎裂的數據轉化為具備「預測力」的獲客指標。我們不只跨媒體，更跨越決策邊界，在消費者的意圖萌發瞬間，為品牌精準編排每一次的高感度連結。
+          </p>
+          <a href="#" class="btn btn--accent">立即預約策略諮詢</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ THREE CORES ══ -->
+  <section class="cores">
+    <div class="container">
+      <h2 class="cores__heading">三大智能核心，全面強化你的廣告競爭力</h2>
+
+      <div class="cores__grid">
+
+        <!-- Core 1 -->
+        <article class="core">
+          <div class="core__body">
+            <span class="core__num">1</span>
+            <h3 class="core__title">意圖預測模型</h3>
+            <p class="core__subtitle">讓每一分預算都具備進化能力</p>
+            <p class="core__desc">
+              從「回顧過去」轉向「預測未來」。我們不僅整合一、二、三方數據，更透過 AI 深度解析受眾的潛在行為訊號。從投放前的智慧受眾畫像（Audience AI）到投放中的動態優化，AI 將資源流向最具轉化潛力的節點，確保預算發揮超常效能。
+            </p>
+          </div>
+          <div class="core__img">
+            <img src="images/Advertisers-1.png" alt="意圖預測模型">
+          </div>
+        </article>
+
+        <!-- Core 2 -->
+        <article class="core">
+          <div class="core__body">
+            <span class="core__num">2</span>
+            <h3 class="core__title">跨媒體平台布局</h3>
+            <p class="core__subtitle">在動態旅程中實現無縫對話</p>
+            <p class="core__desc">
+              應對非線性、破碎化的消費者軌跡。現代消費者的路徑是跳躍的。OneAD 以 AI 為中樞，跨越聯播網、影音與社群版位，進行全通路的實時佈局（Omnichannel Orchestration）。我們確保品牌訊息能在最合適的脈絡（Context）下現身，將破碎的接觸點串聯成可積累的品牌體驗。
+            </p>
+          </div>
+          <div class="core__img">
+            <img src="images/Advertisers-2.png" alt="跨媒體平台布局">
+          </div>
+        </article>
+
+        <!-- Core 3 -->
+        <article class="core">
+          <div class="core__body">
+            <span class="core__num">3</span>
+            <h3 class="core__title">500+ 品牌的實戰智慧</h3>
+            <p class="core__subtitle">結合 AI 賦能的策略洞察</p>
+            <p class="core__desc">
+              機器學習的深度，來自產業經驗的實戰積累。我們擁有超過 500 家頂尖品牌的服務經驗，這些海量真實數據構成了我們強大的產業領航模型。我們提供的不是通用的解決方案，而是結合 AI 算力與資深顧問直覺的「進攻策略」——確保技術落地，精準擊中市場痛點。
+            </p>
+          </div>
+          <div class="core__img">
+            <img src="images/Advertisers-3.png" alt="500+ 品牌實戰智慧">
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ BRAND WALL ══ -->
+  <section class="brands">
+    <div class="container">
+      <h2 class="brands__heading">與頂尖品牌並肩，共創行銷價值</h2>
+    </div>
+
+    <div class="brand-rows">
+      <!-- Row 1 -->
+      <div class="brand-row">
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+        <!-- duplicate -->
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+      </div>
+
+      <!-- Row 2 (reverse) -->
+      <div class="brand-row brand-row--reverse brand-row--slow">
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/ONEAD.png" alt="ONEAD"></span>ONEAD</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</span>
+        <!-- duplicate -->
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/ONEAD.png" alt="ONEAD"></span>ONEAD</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</span>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="brand-row">
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+        <!-- duplicate -->
+        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
+        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <div class="footer__logo-onead">
+            <img src="images/footer-logo.svg" alt="ONEAD">
+          </div>
+          <p class="footer__copyright">Copyright©OneAD.All rights reserved.</p>
+        </div>
+        <div class="footer__right">
+          <div class="footer__links-row">
+            <a href="#">訂閱電子報</a>
+            <a href="#">隱私權聲明</a>
+            <a href="#">防詐騙聲明</a>
+            <div class="footer__logo-onedata">
+              <img src="images/onedata.svg" alt="ONEDATA">
+            </div>
+          </div>
+          <div class="footer__social-row">
+            <span class="footer__follow-label">Follow Us :</span>
+            <a href="#" class="social-icon social-icon--fb" aria-label="Facebook">
+              <img src="images/fb.svg" alt="FB">
+            </a>
+            <a href="#" class="social-icon social-icon--linkedin" aria-label="LinkedIn">
+              <img src="images/in.svg" alt="LinkedIn">
+            </a>
+            <a href="#" class="social-icon social-icon--line" aria-label="LINE">
+              <img src="images/line.svg" alt="LINE">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.navbar__links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

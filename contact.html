@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>聯絡我們 | OneAD</title>
+  <style>
+    :root {
+      --orange: #FF6546;
+      --dark: #111111;
+      --gray: #666666;
+      --light: #999999;
+      --bg-light: #f6f5f3;
+      --white: #ffffff;
+      --max-w: 1200px;
+
+      /* Design System Tokens (對齊 design-system.html) */
+      --color-brand: #1789FA;
+      --color-brand-hover: #0061CC;
+      --color-brand-active: #00428F;
+      --color-accent: var(--orange);
+      --color-accent-hover: #E5512F;
+      --color-accent-active: #B33B1F;
+      --color-accent-subtle: #FFF0EC;
+      --color-surface: var(--white);
+      --color-background-subtle: #F6F5F3;
+      --color-border: #D9D8D5;
+      --color-text-primary: var(--dark);
+      --color-text-inverse: var(--white);
+      --color-text-disabled: #B8B6B2;
+      --color-focus-brand: rgba(23, 137, 250, 0.35);
+      --color-focus-accent: rgba(255, 101, 70, 0.35);
+      --radius-pill: 100px;
+      --font-family-heading: 'Nunito Sans', 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
+      --duration-fast: 150ms;
+      --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+      /* Contact page specific */
+      --contact-card-bg: #E8E4DC;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── BUTTON (對齊 design-system.html) ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 32px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-family-heading);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--duration-fast) var(--easing-standard);
+    }
+
+    .btn--accent {
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
+      border-color: var(--color-accent);
+    }
+    .btn--accent:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+    .btn--accent.is-active { background: var(--color-accent-active); border-color: var(--color-accent-active); }
+    .btn--accent.is-focus { box-shadow: 0 0 0 3px var(--color-focus-accent); }
+
+    /* ── NAVBAR ── */
+    .navbar-outer {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 12px 24px;
+      pointer-events: none;
+    }
+
+    .navbar {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 960px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar__logo img {
+      display: block;
+      width: 130px;
+      height: 20px;
+    }
+
+    .navbar__links {
+      display: flex;
+      list-style: none;
+      gap: 40px;
+    }
+
+    .navbar__links a {
+      display: block;
+      font-size: 15.6px;
+      color: #141414;
+      letter-spacing: -0.1px;
+      line-height: 1;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+
+    .navbar__links a:hover {
+      color: var(--orange);
+    }
+
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .navbar__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #141414;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .navbar__hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .navbar__hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navbar__hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 64px 0 120px;
+      background: linear-gradient(180deg, #ffffff 0%, #f3f2f0 100%);
+    }
+
+    .contact__heading {
+      max-width: 900px;
+      margin: 0 auto 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .contact__title {
+      font-family: var(--font-family-heading);
+      font-size: 92px;
+      font-weight: 900;
+      color: var(--color-accent);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+    }
+
+    .contact__title__line {
+      display: block;
+    }
+
+    .contact__title__row {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+    }
+
+    .contact__title__row .contact__title__line {
+      display: inline-block;
+    }
+
+    .contact__desc {
+      display: inline-block;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.85;
+      letter-spacing: normal;
+      max-width: 280px;
+      padding-bottom: 14px;
+    }
+
+    .contact__card {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--contact-card-bg);
+      border-radius: 12px;
+      padding: 40px 36px;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Form */
+    .contact__form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact__field {
+      width: 100%;
+      padding: 14px 22px;
+      background: var(--white);
+      border: 1px solid transparent;
+      border-radius: var(--radius-pill);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--color-text-primary);
+      line-height: 1.4;
+      transition: border-color var(--duration-fast) var(--easing-standard),
+                  box-shadow var(--duration-fast) var(--easing-standard);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .contact__field::placeholder {
+      color: #9a9a9a;
+    }
+
+    .contact__field:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-focus-accent);
+    }
+
+    select.contact__field {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23666' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 22px center;
+      padding-right: 44px;
+      cursor: pointer;
+    }
+
+    textarea.contact__field {
+      min-height: 110px;
+      border-radius: 18px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .contact__submit-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    /* Success state */
+    .contact__success {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0;
+    }
+
+    .contact__check {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+    }
+
+    .contact__check::before {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 22px;
+      border-left: 5px solid #fff;
+      border-bottom: 5px solid #fff;
+      transform: rotate(-45deg) translate(3px, -4px);
+      border-bottom-left-radius: 2px;
+    }
+
+    .contact__success-title {
+      font-family: var(--font-family-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-accent);
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .contact__success-desc {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.9;
+    }
+
+    [hidden] { display: none !important; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #fff;
+      border-top: 1px solid #c6d1dd;
+    }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      gap: 24px;
+    }
+
+    .footer__left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .footer__logo-onead img {
+      display: block;
+      width: 156px;
+      height: 24px;
+    }
+
+    .footer__copyright {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #616e84;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+
+    .footer__right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-end;
+    }
+
+    .footer__links-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer__links-row a {
+      font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3b3e40;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer__links-row a:hover {
+      text-decoration: underline;
+    }
+
+    .footer__logo-onedata img {
+      display: block;
+      width: 138px;
+      height: 16px;
+    }
+
+    .footer__social-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer__follow-label {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      color: #616e84;
+      line-height: 1.5;
+      white-space: nowrap;
+      width: 70px;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      text-decoration: none;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .social-icon--fb {
+      background: #1877f2;
+      border-radius: 64px;
+    }
+
+    .social-icon--linkedin {
+      background: #006699;
+      border-radius: 4px;
+    }
+
+    .social-icon--line {
+      background: #3ace01;
+      border-radius: 4px;
+    }
+
+    .social-icon img {
+      display: block;
+      position: absolute;
+      object-fit: contain;
+    }
+
+    .social-icon--fb img {
+      top: 19.53%;
+      left: 29.49%;
+      width: 43%;
+      height: 80.47%;
+    }
+
+    .social-icon--linkedin img {
+      top: 25%;
+      left: 25%;
+      width: 50%;
+      height: 48.84%;
+    }
+
+    .social-icon--line img {
+      top: 20.83%;
+      left: 16.67%;
+      width: 66.66%;
+      height: 62.45%;
+    }
+
+    /* ── RWD ── */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 32px;
+      }
+
+      .navbar-outer {
+        padding: 12px 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+
+      .navbar-outer {
+        padding: 10px 12px;
+      }
+
+      .navbar {
+        padding: 0 18px;
+        position: relative;
+        border-radius: 12px;
+      }
+
+      .navbar__hamburger {
+        display: flex;
+      }
+
+      .navbar__links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+      }
+
+      .navbar__links.open {
+        display: flex;
+      }
+
+      .navbar__links a {
+        padding: 12px 20px;
+        font-size: 15px;
+      }
+
+      .contact {
+        padding: 40px 0 72px;
+      }
+
+      .contact__heading {
+        justify-content: flex-start;
+        margin-bottom: 24px;
+      }
+
+      .contact__title {
+        font-size: clamp(48px, 9vw, 72px);
+      }
+
+      .contact__title__row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .contact__desc {
+        max-width: 100%;
+        padding-bottom: 0;
+      }
+
+      .contact__card {
+        padding: 32px 24px;
+      }
+
+      .footer__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 32px 0;
+      }
+
+      .footer__right {
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .footer__links-row {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact__title {
+        font-size: clamp(36px, 10vw, 48px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <header class="navbar-outer">
+    <nav class="navbar" id="navbar">
+      <a href="advertiser.html" class="navbar__logo">
+        <img src="images/logo.svg" alt="ONEAD" height="20">
+      </a>
+      <button class="navbar__hamburger" id="hamburger" aria-label="選單">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#">產品與解方</a></li>
+        <li><a href="#">精彩案例</a></li>
+        <li><a href="#">成為合作夥伴</a></li>
+        <li><a href="#">知識與媒體中心</a></li>
+        <li><a href="#">關於 OneAD</a></li>
+        <li><a href="contact.html">聯繫我們</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ CONTACT ══ -->
+  <main class="contact">
+    <div class="container">
+      <div class="contact__heading">
+        <h1 class="contact__title">
+          <span class="contact__title__line">與 OneAD 展開</span>
+          <span class="contact__title__row">
+            <span class="contact__title__line">下一步合作</span>
+            <span class="contact__desc">請選擇洽詢主題並填寫相關資訊，我們將依據您提供的內容安排對應窗口協助，讓您的需求能更快速地被確認與處理。</span>
+          </span>
+        </h1>
+      </div>
+
+      <div class="contact__card">
+        <!-- Form (initial state) -->
+        <form class="contact__form" id="contactForm" novalidate>
+          <select class="contact__field" name="topic" required>
+            <option value="" disabled selected>我想瞭解的主題是</option>
+            <option value="advertising">廣告投放與策略</option>
+            <option value="media">媒體合作</option>
+            <option value="tech">技術整合</option>
+            <option value="partnership">成為合作夥伴</option>
+            <option value="other">其他</option>
+          </select>
+          <input class="contact__field" type="text" name="name" placeholder="姓名（必填）*" required>
+          <input class="contact__field" type="email" name="email" placeholder="電子信箱（必填）*" required>
+          <input class="contact__field" type="text" name="company" placeholder="公司名稱（必填）*" required>
+          <input class="contact__field" type="text" name="need" placeholder="您的需要（必填）*" required>
+          <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
+          <div class="contact__submit-row">
+            <button type="submit" class="btn btn--accent">送出資料</button>
+          </div>
+        </form>
+
+        <!-- Success (hidden initially) -->
+        <div class="contact__success" id="contactSuccess" hidden>
+          <div class="contact__check" aria-hidden="true"></div>
+          <h2 class="contact__success-title">我們已收到您的需求</h2>
+          <p class="contact__success-desc">OneAD 團隊將盡快確認內容<br>並由合適窗口與您聯繫</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <div class="footer__logo-onead">
+            <img src="images/footer-logo.svg" alt="ONEAD">
+          </div>
+          <p class="footer__copyright">Copyright©OneAD.All rights reserved.</p>
+        </div>
+        <div class="footer__right">
+          <div class="footer__links-row">
+            <a href="#">訂閱電子報</a>
+            <a href="#">隱私權聲明</a>
+            <a href="#">防詐騙聲明</a>
+            <div class="footer__logo-onedata">
+              <img src="images/onedata.svg" alt="ONEDATA">
+            </div>
+          </div>
+          <div class="footer__social-row">
+            <span class="footer__follow-label">Follow Us :</span>
+            <a href="#" class="social-icon social-icon--fb" aria-label="Facebook">
+              <img src="images/fb.svg" alt="FB">
+            </a>
+            <a href="#" class="social-icon social-icon--linkedin" aria-label="LinkedIn">
+              <img src="images/in.svg" alt="LinkedIn">
+            </a>
+            <a href="#" class="social-icon social-icon--line" aria-label="LINE">
+              <img src="images/line.svg" alt="LINE">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.navbar__links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Contact form submit -> show success
+    const form = document.getElementById('contactForm');
+    const success = document.getElementById('contactSuccess');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // 簡易必填檢查
+      const required = form.querySelectorAll('[required]');
+      for (const field of required) {
+        if (!field.value.trim()) {
+          field.focus();
+          field.classList.add('is-focus');
+          return;
+        }
+      }
+      form.hidden = true;
+      success.hidden = false;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+
+</html>
