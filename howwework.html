@@ -11,9 +11,20 @@
       --dark: #111111;
       --gray: #666666;
       --light: #999999;
-      --bg-light: #f6f5f3;
+      --bg-light: #edefef;         /* 灰色底 (羅小姐 0702 規範) */
+      --color-heading: #595757;    /* 標題色 (羅小姐 0702 規範) */
       --white: #ffffff;
       --max-w: 1200px;
+
+      /* ── Typography Spec 0702 (行銷 羅小姐規範) ──
+         H1 = 56/32px · 800 · 1.15 · -0.03em
+         H2 = 48/26px · 700 · 1.25 · -0.01em
+         H3 = 28/22px · 700 · 1.35 · 0
+         H4 = 20/18px · 600 · 1.4
+         H5 = 16/15px · 600 · 1.5 · +0.01em
+         P  = 16px    · 400 · 1.75
+         Button = 15px · 600
+      */
     }
 
     *,
@@ -24,9 +35,7 @@
       padding: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
@@ -35,15 +44,8 @@
       line-height: 1.6;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
 
     .container {
       max-width: var(--max-w);
@@ -51,19 +53,20 @@
       padding: 0 48px;
     }
 
-    /* ── BUTTON ── */
+    /* ── BUTTON (Typography Spec: 15px) ── */
     .btn {
       display: inline-flex;
       align-items: center;
-      padding: 11px 32px;
+      padding: 12px 32px;
       border-radius: 100px;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       transition: all .25s;
       border: 2px solid transparent;
       line-height: 1;
       white-space: nowrap;
+      letter-spacing: 0.5px;
     }
 
     .btn-primary {
@@ -71,22 +74,14 @@
       color: #fff;
       border-color: var(--orange);
     }
-
-    .btn-primary:hover {
-      background: #e0563c;
-      border-color: #e0563c;
-    }
+    .btn-primary:hover { background: #e0563c; border-color: #e0563c; }
 
     .btn-outline {
       background: transparent;
       color: var(--orange);
       border-color: var(--orange);
     }
-
-    .btn-outline:hover {
-      background: var(--orange);
-      color: #fff;
-    }
+    .btn-outline:hover { background: var(--orange); color: #fff; }
 
     /* ── NAVBAR ── */
     .navbar-outer {
@@ -103,7 +98,7 @@
       pointer-events: auto;
       width: 100%;
       max-width: 960px;
-      height: 64px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -112,22 +107,14 @@
       -webkit-backdrop-filter: blur(15px);
       backdrop-filter: blur(15px);
       border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 16px;
+      border-radius: 40px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       font-family: Arial, sans-serif;
     }
 
-    .navbar__logo img {
-      display: block;
-      width: 130px;
-      height: 20px;
-    }
+    .navbar__logo img { display: block; width: 130px; height: 20px; }
 
-    .navbar__links {
-      display: flex;
-      list-style: none;
-      gap: 40px;
-    }
+    .navbar__links { display: flex; list-style: none; gap: 40px; }
 
     .navbar__links a {
       display: block;
@@ -138,10 +125,7 @@
       transition: color .2s;
       white-space: nowrap;
     }
-
-    .navbar__links a:hover {
-      color: var(--orange);
-    }
+    .navbar__links a:hover { color: var(--orange); }
 
     .navbar__hamburger {
       display: none;
@@ -152,7 +136,6 @@
       cursor: pointer;
       padding: 4px;
     }
-
     .navbar__hamburger span {
       display: block;
       width: 22px;
@@ -161,79 +144,64 @@
       border-radius: 2px;
       transition: all .3s;
     }
+    .navbar__hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__hamburger.active span:nth-child(2) { opacity: 0; }
+    .navbar__hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    .navbar__hamburger.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+    /* 每個 section 佔滿螢幕高度（羅小姐指定） */
+    .how-we-work,
+    .what-defines,
+    .life,
+    .team-daily,
+    .cta-bottom {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .navbar__hamburger.active span:nth-child(2) {
-      opacity: 0;
+    /* ══ HOW WE WORK (Hero · 文字左 + 圖片右) ══ */
+    .how-we-work { padding: 80px 0 96px; }
+
+    .how-we-work__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
     }
 
-    .navbar__hamburger.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* ── HOW WE WORK ── */
-    .how-we-work {
-      padding: 80px 0 40px;
-    }
-
-    .anno {
-      font-size: 11px;
-      color: var(--light);
-      margin-bottom: 2px;
-      font-style: italic;
-    }
-
+    /* H1 · 56px / 800 / 1.15 / -0.03em (Mobile 32px) */
     .how-we-work__heading {
-      font-size: clamp(62px, 9vw, 112px);
-      font-weight: 900;
-      color: var(--orange);
-      line-height: .9;
-      letter-spacing: -2px;
-      margin-bottom: 22px;
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 800;
+      color: var(--color-heading);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
     }
 
-    .how-we-work__subtitle {
-      display: inline;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 0;
-      vertical-align: bottom;
-      margin-left: 12px;
-    }
-
+    /* P · 16px / 400 / 1.75 */
     .how-we-work__body {
-      max-width: 660px;
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 400;
       color: var(--gray);
-      line-height: 1.85;
+      line-height: 1.75;
+      margin-bottom: 32px;
     }
 
     .how-we-work__photo {
-      margin-top: 36px;
       width: 100%;
-      height: 440px;
-      position: relative;
+      height: 420px;
       overflow: hidden;
+      border-radius: 4px;
     }
-
     .how-we-work__photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .how-we-work__cta {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 24px;
-    }
-
-    /* ── WHAT DEFINES US ── */
+    /* ══ WHAT DEFINES US (灰底 · 大圓 + 弧形特質列表 · 羅小姐堅持排版) ══ */
     .what-defines {
       padding: 96px 0;
       background: var(--bg-light);
@@ -241,84 +209,57 @@
       overflow: hidden;
     }
 
+    /* 實心白色大圓（羅小姐堅持排版）*/
     .what-defines::before {
       content: '';
       position: absolute;
-      width: 560px;
-      height: 560px;
+      width: 900px;
+      height: 900px;
       border-radius: 50%;
-      border: 0px solid #e0deda;
-      left: -190px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .what-defines__meta {
-      font-size: 12px;
-      color: var(--light);
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    .what-defines__grid {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 80px;
-      align-items: center;
-      position: relative;
-    }
-
-    .what-defines__heading {
-      font-size: clamp(52px, 7.5vw, 96px);
-      font-weight: 900;
-      color: var(--orange);
-      line-height: .88;
-      letter-spacing: -1px;
-      margin: 4px 0 20px;
-    }
-
-    .what-defines__desc {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.75;
-    }
-
-    .stats-num {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 1px;
-      margin-bottom: 28px;
-      text-align: right;
-    }
-
-    /* 右欄：提供定位錨點給弧線 ::before */
-    .what-defines__right {
-      position: relative;
-    }
-
-    /* 弧線圓：R=400px，圓心在欄位左緣 -317px，右弧穿過各橘色圓圈圓心 */
-    .what-defines__right::before {
-      content: '';
-      position: absolute;
-      width: 790px;
-      height: 790px;
-      border-radius: 50%;
-      border: 1.5px solid #ccc8c0;
-      left: -717px;
-      /* 圓心 -317px - R 400px = -717px */
+      background: var(--white);
+      left: 150px;
       top: 50%;
       transform: translateY(-50%);
       pointer-events: none;
       z-index: 0;
     }
 
+    .what-defines__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* H2 · 48px / 700 / 1.25 / -0.01em (Mobile 26px) */
+    .what-defines__heading {
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    /* P · 16px / 400 / 1.75 */
+    .what-defines__desc {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    .what-defines__right {
+      position: relative;
+    }
+
     .traits {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 24px;
       position: relative;
       z-index: 1;
     }
@@ -329,111 +270,139 @@
       align-items: flex-start;
     }
 
-    /* 弧形排列：中間最右、上下兩端最左，弧口朝左；與 R=400px 圓弧吻合 */
-    .trait:nth-child(1) {
-      transform: translateX(15px);
-    }
-
-    .trait:nth-child(2) {
-      transform: translateX(44px);
-    }
-
-    .trait:nth-child(3) {
-      transform: translateX(60px);
-    }
-
-    .trait:nth-child(4) {
-      transform: translateX(44px);
-    }
-
-    .trait:nth-child(5) {
-      transform: translateX(15px);
-    }
+    /* 弧形排列：中間最右、上下兩端最左，弧口朝左 */
+    .trait:nth-child(1) { transform: translateX(0px); }
+    .trait:nth-child(2) { transform: translateX(56px); }
+    .trait:nth-child(3) { transform: translateX(72px); }
+    .trait:nth-child(4) { transform: translateX(56px); }
+    .trait:nth-child(5) { transform: translateX(20px); }
 
     .trait__num {
       flex-shrink: 0;
-      width: 46px;
-      height: 46px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--orange);
       color: #fff;
-      font-size: 20px;
-      font-weight: 900;
+      font-size: 16px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-top: 4px;
     }
 
+    /* H3 · 28px / 700 / 1.35 (Mobile 22px) */
     .trait__title {
-      font-size: 16px;
+      font-size: clamp(22px, 2.2vw, 28px);
       font-weight: 700;
-      margin-bottom: 4px;
+      color: var(--color-heading);
+      line-height: 1.35;
+      margin-bottom: 6px;
     }
 
+    /* P · 16px / 400 / 1.75 */
     .trait__desc {
-      font-size: 13px;
+      font-size: 16px;
       color: var(--gray);
-      line-height: 1.65;
+      line-height: 1.75;
     }
 
-    .stats-num-bottom {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 1px;
-      text-align: right;
-      margin-top: 18px;
-    }
-
-    /* ── TEAM DAILY ── */
-    .team-daily {
+    /* ══ LIFE IN ONEAD (人資福利 · icon grid) ══ */
+    .life {
       padding: 96px 0;
     }
 
-    .team-daily__heading {
-      font-size: clamp(44px, 7vw, 92px);
-      font-weight: 900;
-      color: var(--orange);
-      line-height: 1;
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      margin-bottom: 4px;
-    }
-
-    .team-daily__heading .anno {
-      font-size: 14px;
-    }
-
-    .team-daily__subtitle {
-      display: inline;
-      font-size: 20px;
+    /* H2 · 48px / 700 / 1.25 / -0.01em (Mobile 26px) */
+    .life__heading {
+      font-size: clamp(26px, 4vw, 48px);
       font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 0;
-      vertical-align: bottom;
-      margin-left: 12px;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
     }
 
+    /* P · 16px / 400 / 1.75 */
+    .life__intro {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 64px;
+      max-width: 720px;
+    }
+
+    .life__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 56px 32px;
+    }
+
+    .life__item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+
+    .life__icon {
+      width: 84px;
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-heading);
+    }
+
+    .life__icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* H5 · 16px / 600 / 1.5 (Mobile 15px) */
+    .life__label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-heading);
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    /* ══ TEAM DAILY (6 卡片) ══ */
+    .team-daily {
+      padding: 96px 0;
+      background: var(--bg-light);
+    }
+
+    /* H2 · 48px / 700 / 1.25 / -0.01em */
     .team-daily__heading {
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
       margin-bottom: 48px;
+      text-align: center;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
     }
 
     .card {
-      border-radius: 0px;
+      border-radius: 8px;
       overflow: hidden;
       background: var(--white);
       box-shadow: 0 2px 14px rgba(0, 0, 0, .07);
       transition: transform .25s, box-shadow .25s;
     }
-
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 32px rgba(0, 0, 0, .12);
@@ -444,108 +413,86 @@
       height: 178px;
       overflow: hidden;
     }
-
-    .card__img svg,
     .card__img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .card__body {
-      padding: 16px 18px 18px;
-    }
+    .card__body { padding: 20px 22px 22px; }
 
-    .card__tag {
+    /* 日期 · 12px 小標，在標題上方 */
+    .card__date {
       display: block;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--orange);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--light);
       margin-bottom: 8px;
-      letter-spacing: .3px;
+      letter-spacing: 0.3px;
     }
 
+    /* H3 · 卡片內縮至 22px（同 H3 mobile 規範）*/
     .card__title {
-      font-size: 14px;
+      font-size: 22px;
       font-weight: 700;
-      line-height: 1.55;
-      margin-bottom: 16px;
+      color: var(--color-heading);
+      line-height: 1.4;
+      letter-spacing: 0;
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    .card__footer {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11.5px;
-      color: var(--light);
-    }
-
-    .team-daily__cta-row {
+    .team-daily__cta {
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 40px;
     }
 
-    .team-daily__stats {
-      font-size: 22px;
+    /* ══ CTA BOTTOM (羅小姐的堅持 · 裝置圖當背景、非常大、傾斜、被切到) ══ */
+    .cta-bottom {
+      padding: 96px 0;
+      background: #f5f4f2;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 裝置合成圖 · 絕對定位當背景層，稍微傾斜、右側略切 */
+    .cta-bottom__bg {
+      position: absolute;
+      width: 75%;
+      max-width: none;
+      height: auto;
+      top: 60%;
+      right: -10%;
+      transform: translateY(-60%) rotate(-8deg);
+      z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
+    }
+
+    .cta-bottom .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-bottom__text {
+      max-width: 700px;
+      transform: translate(-250px, -100px);
+    }
+
+    /* H2 · 48px / 700 / 1.25 / -0.01em */
+    .cta-bottom__heading {
+      font-size: clamp(26px, 4vw, 48px);
       font-weight: 700;
-      color: var(--dark);
-      letter-spacing: 1px;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
     }
 
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      padding: 0 0 80px;
-    }
-
-    .cta-banner__inner {
-      background: #1789fa;
-      border-radius: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 64px 80px;
-      min-height: 240px;
-    }
-
-    .cta-banner__heading {
-      font-size: 24px;
-      font-weight: 400;
-      color: #fff;
-      letter-spacing: -0.5px;
-      line-height: 1.4;
-      font-family: 'Noto Sans TC', 'Noto Sans', '微軟正黑體', sans-serif;
-    }
-
-    .cta-banner__btn {
-      display: inline-flex;
-      align-items: center;
-      background: #fff;
-      color: #1789fa;
-      border-radius: 100px;
-      padding: 11px 32px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: opacity .2s;
-      line-height: 1;
-    }
-
-    .cta-banner__btn:hover {
-      opacity: .88;
-    }
-
-    /* ── FOOTER ── */
-    .site-footer {
-      background: #fff;
-      border-top: 1px solid #c6d1dd;
-    }
+    /* ══ FOOTER ══ */
+    .site-footer { background: #fff; border-top: 1px solid #c6d1dd; }
 
     .footer__inner {
       display: flex;
@@ -554,75 +501,34 @@
       padding: 40px 0;
       gap: 24px;
     }
-
-    .footer__left {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .footer__logo-onead img {
-      display: block;
-      width: 156px;
-      height: 24px;
-    }
-
+    .footer__left { display: flex; flex-direction: column; gap: 24px; }
+    .footer__logo-onead img { display: block; width: 156px; height: 24px; }
     .footer__copyright {
       font-family: 'Nunito Sans', sans-serif;
       font-size: 14px;
-      font-weight: 400;
       color: #616e84;
       line-height: 1.5;
       white-space: nowrap;
     }
-
-    .footer__right {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: flex-end;
-    }
-
-    .footer__links-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
+    .footer__right { display: flex; flex-direction: column; gap: 24px; align-items: flex-end; }
+    .footer__links-row { display: flex; align-items: center; gap: 24px; }
     .footer__links-row a {
       font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
       font-size: 16px;
       font-weight: 600;
       color: #3b3e40;
-      text-decoration: none;
       white-space: nowrap;
     }
-
-    .footer__links-row a:hover {
-      text-decoration: underline;
-    }
-
-    .footer__logo-onedata img {
-      display: block;
-      width: 138px;
-      height: 16px;
-    }
-
-    .footer__social-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .footer__links-row a:hover { text-decoration: underline; }
+    .footer__logo-onedata img { display: block; width: 138px; height: 16px; }
+    .footer__social-row { display: flex; align-items: center; gap: 8px; }
     .footer__follow-label {
       font-family: 'Nunito Sans', sans-serif;
       font-size: 14px;
       color: #616e84;
-      line-height: 1.5;
       white-space: nowrap;
       width: 70px;
     }
-
     .social-icon {
       display: flex;
       align-items: center;
@@ -630,98 +536,39 @@
       width: 32px;
       height: 32px;
       overflow: hidden;
-      text-decoration: none;
       flex-shrink: 0;
       position: relative;
     }
+    .social-icon--fb { background: #1877f2; border-radius: 64px; }
+    .social-icon--linkedin { background: #006699; border-radius: 4px; }
+    .social-icon--line { background: #3ace01; border-radius: 4px; }
+    .social-icon img { display: block; position: absolute; object-fit: contain; }
+    .social-icon--fb img { top: 19.53%; left: 29.49%; width: 43%; height: 80.47%; }
+    .social-icon--linkedin img { top: 25%; left: 25%; width: 50%; height: 48.84%; }
+    .social-icon--line img { top: 20.83%; left: 16.67%; width: 66.66%; height: 62.45%; }
 
-    .social-icon--fb {
-      background: #1877f2;
-      border-radius: 64px;
-    }
-
-    .social-icon--linkedin {
-      background: #006699;
-      border-radius: 4px;
-    }
-
-    .social-icon--line {
-      background: #3ace01;
-      border-radius: 4px;
-    }
-
-    .social-icon img {
-      display: block;
-      position: absolute;
-      object-fit: contain;
-    }
-
-    .social-icon--fb img {
-      top: 19.53%;
-      left: 29.49%;
-      width: 43%;
-      height: 80.47%;
-    }
-
-    .social-icon--linkedin img {
-      top: 25%;
-      left: 25%;
-      width: 50%;
-      height: 48.84%;
-    }
-
-    .social-icon--line img {
-      top: 20.83%;
-      left: 16.67%;
-      width: 66.66%;
-      height: 62.45%;
-    }
-
-    /* ── RWD ── */
+    /* ══ RWD ══ */
     @media (max-width: 1024px) {
-      .container {
-        padding: 0 32px;
-      }
-
-      .navbar-outer {
-        padding: 12px 16px;
-      }
-
-      .what-defines__grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .container { padding: 0 32px; }
+      .navbar-outer { padding: 12px 16px; }
+      .how-we-work__grid,
+      .cta-bottom__grid { grid-template-columns: 1fr; gap: 32px; }
+      .how-we-work__photo { height: 340px; }
+      .what-defines__grid { grid-template-columns: 1fr; gap: 48px; }
+      .life__grid { grid-template-columns: repeat(2, 1fr); }
+      .cards { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
-      .container {
-        padding: 0 20px;
-      }
-
-      .navbar-outer {
-        padding: 10px 12px;
-      }
-
-      .navbar {
-        padding: 0 18px;
-        position: relative;
-        border-radius: 12px;
-      }
-
-      .navbar__hamburger {
-        display: flex;
-      }
-
+      .container { padding: 0 20px; }
+      .navbar-outer { padding: 10px 12px; }
+      .navbar { padding: 0 18px; position: relative; border-radius: 40px; }
+      .navbar__hamburger { display: flex; }
       .navbar__links {
         display: none;
         position: absolute;
         top: calc(100% + 8px);
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         background: rgba(255, 255, 255, 0.95);
         -webkit-backdrop-filter: blur(15px);
         backdrop-filter: blur(15px);
@@ -732,89 +579,34 @@
         padding: 8px 0 12px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
       }
+      .navbar__links.open { display: flex; }
+      .navbar__links a { padding: 12px 20px; font-size: 15px; }
 
-      .navbar__links.open {
-        display: flex;
+      .how-we-work, .what-defines, .life, .team-daily, .cta-bottom { padding: 56px 0; }
+      .how-we-work__photo { height: 240px; }
+      /* Mobile: 裝置背景縮小、降低透明度、置於下方作氛圍圖 */
+      .cta-bottom__bg {
+        width: 140%;
+        right: -40%;
+        top: 65%;
+        opacity: 0.5;
       }
+      .cta-bottom__text { max-width: 100%; }
+      .what-defines::before { display: none; }
+      .cards { grid-template-columns: 1fr; }
 
-      .navbar__links a {
-        padding: 12px 20px;
-        font-size: 15px;
-      }
+      /* RWD Mobile 字級規範 · H1=32px / H2=26px / H3=22px */
+      .how-we-work__heading { font-size: 32px; }
+      .what-defines__heading,
+      .life__heading,
+      .team-daily__heading,
+      .cta-bottom__heading { font-size: 26px; }
+      .trait__title { font-size: 22px; }
+      .life__label { font-size: 15px; }
 
-      .how-we-work {
-        padding: 48px 0 24px;
-      }
-
-      .what-defines {
-        padding: 56px 0;
-      }
-
-      .team-daily {
-        padding: 56px 0;
-      }
-
-      .how-we-work__photo {
-        height: 260px;
-      }
-
-      .what-defines::before {
-        display: none;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .team-daily__cta-row {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .cta-banner__inner {
-        flex-direction: column;
-        gap: 24px;
-        padding: 40px 32px;
-      }
-
-      .cta-banner__heading {
-        font-size: 20px;
-      }
-
-      .footer__inner {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 32px 0;
-      }
-
-      .footer__right {
-        align-items: flex-start;
-        width: 100%;
-      }
-
-      .footer__links-row {
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .how-we-work__heading {
-        font-size: 52px;
-        letter-spacing: -1px;
-      }
-
-      .what-defines__heading {
-        font-size: 44px;
-      }
-
-      .team-daily__heading {
-        font-size: 36px;
-      }
-
-      .cta-banner__heading {
-        font-size: 18px;
-      }
+      .footer__inner { flex-direction: column; align-items: flex-start; padding: 32px 0; }
+      .footer__right { align-items: flex-start; width: 100%; }
+      .footer__links-row { flex-wrap: wrap; gap: 16px; }
     }
   </style>
 </head>
@@ -844,17 +636,19 @@
   <!-- ══ HOW WE WORK ══ -->
   <section class="how-we-work">
     <div class="container">
-      <h1 class="how-we-work__heading">How<br>We Work<span class="how-we-work__subtitle">人才與文化</span></h1>
-      <p class="how-we-work__body">
-        在 OneAD，我們相信好的成果來自彼此的交流與合作。當團隊願意分享想法、互相支持時，每個人的潛能都能被激發，也能成為激發他人的人。透過這樣正向的成長循環，我們一起把事情做得更好，也與客戶共同創造成功。
-      </p>
-
-      <div class="how-we-work__photo">
-        <img src="images/pic-banner.png" alt="OneAD 團隊合照">
-      </div>
-
-      <div class="how-we-work__cta">
-        <a href="#" class="btn btn-primary">加入 OneAD</a>
+      <div class="how-we-work__grid">
+        <div class="how-we-work__content">
+          <!-- H1 · 56px / 800 / 1.15 / -0.03em -->
+          <h1 class="how-we-work__heading">How We Work</h1>
+          <!-- P · 16px / 400 / 1.75 -->
+          <p class="how-we-work__body">
+            在 OneAD，我們相信好的成果來自彼此的交流與合作。當團隊願意分享想法、互相支持時，每個人的潛能都能被激發，也能成為激發他人的人。透過這樣正向的成長循環，我們一起把事情做得更好，也與客戶共同創造成功。
+          </p>
+          <a href="#" class="btn btn-primary">加入 OneAD</a>
+        </div>
+        <div class="how-we-work__photo">
+          <img src="images/pic-banner.png" alt="OneAD 團隊合照">
+        </div>
       </div>
     </div>
   </section>
@@ -862,14 +656,12 @@
   <!-- ══ WHAT DEFINES US ══ -->
   <section class="what-defines">
     <div class="container">
-      <p class="what-defines__meta">ONEAD 人格特質（虛構文字）</p>
       <div class="what-defines__grid">
-
         <div>
-          <h2 class="what-defines__heading">WHAT<br>DEFINES<br>US</h2>
+          <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+          <h2 class="what-defines__heading">What Defines Us<br>OneAD 人格特質</h2>
           <p class="what-defines__desc">
-            虛構文字。虛構文字。虛構文字。虛構文字。虛構文字。<br>
-            虛構文字。虛構文字。虛構文字。
+            我們相信每一位成員都有獨特的價值。透過共同的信念，我們一起打造充滿創意、實踐與成長動能的工作環境。
           </p>
         </div>
 
@@ -878,41 +670,117 @@
             <li class="trait">
               <div class="trait__num">1</div>
               <div>
-                <p class="trait__title">勇於發聲，創造影響力</p>
+                <!-- H3 · 28px / 700 / 1.35 -->
+                <h3 class="trait__title">勇於發聲，創造影響力</h3>
                 <p class="trait__desc">我們鼓勵提出想法、表達觀點。好的想法值得被聽見，也可能帶來真正的改變。</p>
               </div>
             </li>
             <li class="trait">
               <div class="trait__num">2</div>
               <div>
-                <p class="trait__title">持續精進自我</p>
+                <h3 class="trait__title">持續精進自我</h3>
                 <p class="trait__desc">我們保持學習的心態，不斷精進能力。每一次嘗試，都是成長的一部分。</p>
               </div>
             </li>
             <li class="trait">
               <div class="trait__num">3</div>
               <div>
-                <p class="trait__title">勇於嘗試，保持敏捷</p>
+                <h3 class="trait__title">勇於嘗試，保持敏捷</h3>
                 <p class="trait__desc">在快速變化的數位環境中，我們樂於嘗試新方法，快速學習並持續優化。</p>
               </div>
             </li>
             <li class="trait">
               <div class="trait__num">4</div>
               <div>
-                <p class="trait__title">以科技驅動創新</p>
+                <h3 class="trait__title">以科技驅動創新</h3>
                 <p class="trait__desc">我們以科技保持敏銳度，善用 AI 與數據能力探索新的可能。</p>
               </div>
             </li>
             <li class="trait">
               <div class="trait__num">5</div>
               <div>
-                <p class="trait__title">成為值得信賴的夥伴</p>
+                <h3 class="trait__title">成為值得信賴的夥伴</h3>
                 <p class="trait__desc">我們重視真誠與合作，成功的工作，來自與團隊與客戶共同創造的成果。</p>
               </div>
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ══ LIFE IN ONEAD (人資福利) ══ -->
+  <section class="life">
+    <div class="container">
+      <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+      <h2 class="life__heading">Life in OneAD</h2>
+      <!-- P · 16px / 400 / 1.75 -->
+      <p class="life__intro">從學習成長、職涯發展到生活福利，我們支持夥伴持續拓展能力與視野。</p>
+
+      <div class="life__grid">
+        <!-- 1 · 年度 KRA 目標管理 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-01-0703.svg" alt="年度 KRA 目標管理與 IDP 成長規劃">
+          </div>
+          <p class="life__label">年度 KRA 目標管理<br>與 IDP 成長規劃</p>
+        </div>
+
+        <!-- 2 · 內部共學 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-02-0703.svg" alt="打造內部共學,累積專業知識">
+          </div>
+          <p class="life__label">打造內部共學<br>累積專業知識</p>
+        </div>
+
+        <!-- 3 · 外部進修 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-03-0703.svg" alt="補助外部進修,拓展能力邊界">
+          </div>
+          <p class="life__label">補助外部進修<br>拓展能力邊界</p>
+        </div>
+
+        <!-- 4 · AI 工具實踐 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-04-0703.svg" alt="鼓勵 AI 工具實踐,推動創新學習">
+          </div>
+          <p class="life__label">鼓勵 AI 工具實踐<br>推動創新學習</p>
+        </div>
+
+        <!-- 5 · 員工旅遊補助 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-05-0703.svg" alt="年度員工旅遊補助">
+          </div>
+          <p class="life__label">年度員工旅遊補助</p>
+        </div>
+
+        <!-- 6 · 特休 / 病假 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-06-0703.svg" alt="優於法令,10 天特休假與 3 天全薪病假">
+          </div>
+          <p class="life__label">優於法令，到職即享<br>10 天特休假與 3 天全薪病假</p>
+        </div>
+
+        <!-- 7 · 運動 / 健檢補助 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-07-0703.svg" alt="運動 / 健檢補助">
+          </div>
+          <p class="life__label">運動 / 健檢補助</p>
+        </div>
+
+        <!-- 8 · 員工團體保險 -->
+        <div class="life__item">
+          <div class="life__icon">
+            <img src="images/iocn-08-0703.svg" alt="員工團體保險">
+          </div>
+          <p class="life__label">員工團體保險</p>
+        </div>
       </div>
     </div>
   </section>
@@ -920,100 +788,73 @@
   <!-- ══ TEAM DAILY ══ -->
   <section class="team-daily">
     <div class="container">
-
-      <h2 class="team-daily__heading">
-        團隊的日常<span class="team-daily__subtitle">工作價值觀</span>
-      </h2>
+      <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+      <h2 class="team-daily__heading">團隊的日常</h2>
 
       <div class="cards">
-
-        <!-- Card 1 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-1.jpg" alt="團隊日常 1">
-          </div>
+          <div class="card__img"><img src="images/blog-1.jpg" alt="團隊日常 1"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字虛構文字</span>
-            <h3 class="card__title">虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字</h3>
-            <div class="card__footer"><span>TOMAS YU</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-02-02</span>
+            <h3 class="card__title">什麼是再行銷 Re-Targeting?</h3>
           </div>
         </article>
 
-        <!-- Card 2 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-2.jpg" alt="團隊日常 2">
-          </div>
+          <div class="card__img"><img src="images/blog-2.jpg" alt="團隊日常 2"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字虛構文字虛構文字</span>
-            <h3 class="card__title">【統一廣編制創新】跨網全媒 X 高頻次溝通產品訊息，好的廣告成效不靠運氣也靠得到</h3>
-            <div class="card__footer"><span>OneAD 行銷團隊</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-03-15</span>
+            <h3 class="card__title">跨網全媒 X 高頻次溝通產品訊息</h3>
           </div>
         </article>
 
-        <!-- Card 3 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-3.png" alt="團隊日常 3">
-          </div>
+          <div class="card__img"><img src="images/blog-3.png" alt="團隊日常 3"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字</span>
-            <h3 class="card__title">虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字</h3>
-            <div class="card__footer"><span>TOMAS YU</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-04-08</span>
+            <h3 class="card__title">AI 時代下的廣告投放新策略</h3>
           </div>
         </article>
 
-        <!-- Card 4 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-4.jpg" alt="團隊日常 4">
-          </div>
+          <div class="card__img"><img src="images/blog-4.jpg" alt="團隊日常 4"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字虛構文字</span>
-            <h3 class="card__title">虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字</h3>
-            <div class="card__footer"><span>TOMAS YU</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-04-28</span>
+            <h3 class="card__title">如何用數據驅動品牌成長</h3>
           </div>
         </article>
 
-        <!-- Card 5 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-5.png" alt="團隊日常 5">
-          </div>
+          <div class="card__img"><img src="images/blog-5.png" alt="團隊日常 5"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字虛構文字虛構文字</span>
-            <h3 class="card__title">【統一廣編制創新】跨網全媒 X 高頻次溝通產品訊息，好的廣告成效不靠運氣也靠得到</h3>
-            <div class="card__footer"><span>OneAD 行銷團隊</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-05-12</span>
+            <h3 class="card__title">影音廣告的未來與趨勢觀察</h3>
           </div>
         </article>
 
-        <!-- Card 6 -->
         <article class="card">
-          <div class="card__img">
-            <img src="images/blog-6.png" alt="團隊日常 6">
-          </div>
+          <div class="card__img"><img src="images/blog-6.png" alt="團隊日常 6"></div>
           <div class="card__body">
-            <span class="card__tag">虛構文字</span>
-            <h3 class="card__title">虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字虛構文字</h3>
-            <div class="card__footer"><span>TOMAS YU</span><span>2026年4月28日</span></div>
+            <span class="card__date">2026-06-01</span>
+            <h3 class="card__title">OneAD 團隊文化與工作日常</h3>
           </div>
         </article>
-
       </div>
 
-      <div class="team-daily__cta-row">
+      <div class="team-daily__cta">
         <a href="#" class="btn btn-outline">了解更多</a>
       </div>
-
     </div>
   </section>
 
-  <!-- ══ CTA BANNER ══ -->
-  <section class="cta-banner">
+  <!-- ══ CTA BOTTOM (裝置圖當背景層 · 非常大、傾斜、被切) ══ -->
+  <section class="cta-bottom">
+    <img class="cta-bottom__bg" src="images/Contact_0702.png" alt="">
     <div class="container">
-      <div class="cta-banner__inner">
-        <h2 class="cta-banner__heading">和我們一起<br>實現願景</h2>
-        <a href="#" class="cta-banner__btn">立即聯絡我們</a>
+      <div class="cta-bottom__text">
+        <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+        <h2 class="cta-bottom__heading">與 OneAD 展開<br>下一步合作</h2>
+        <a href="#" class="btn btn-primary">立即聯絡我們</a>
       </div>
     </div>
   </section>

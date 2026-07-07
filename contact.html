@@ -191,23 +191,29 @@
 
     /* ── CONTACT ── */
     .contact {
-      padding: 64px 0 120px;
+      padding: 80px 0 120px;
       background: linear-gradient(180deg, #ffffff 0%, #f3f2f0 100%);
     }
 
-    .contact__heading {
-      max-width: 900px;
-      margin: 0 auto 40px;
+    .contact__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .contact__intro {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      gap: 32px;
     }
 
     .contact__title {
       font-family: var(--font-family-heading);
-      font-size: 92px;
+      font-size: 76px;
       font-weight: 900;
       color: var(--color-accent);
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: -1.5px;
     }
 
@@ -215,39 +221,39 @@
       display: block;
     }
 
-    .contact__title__row {
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
-    }
-
-    .contact__title__row .contact__title__line {
-      display: inline-block;
-    }
-
-    .contact__desc {
-      display: inline-block;
+    .contact__intro-desc {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 400;
       color: var(--gray);
       line-height: 1.85;
       letter-spacing: normal;
-      max-width: 280px;
-      padding-bottom: 14px;
+      max-width: 460px;
     }
 
     .contact__card {
       width: 100%;
       max-width: 520px;
-      margin: 0 auto;
+      margin: 0;
       background: var(--contact-card-bg);
       border-radius: 12px;
       padding: 40px 36px;
-      min-height: 480px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      transition: background var(--duration-fast) var(--easing-standard);
+    }
+
+    .contact__card.is-success {
+      background: var(--color-accent);
+      padding: 56px 40px 40px;
+    }
+
+    .contact__form-intro {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 20px;
     }
 
     /* Form */
@@ -317,11 +323,11 @@
       width: 96px;
       height: 96px;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--white);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 60px;
+      margin-bottom: 56px;
     }
 
     .contact__check::before {
@@ -329,10 +335,18 @@
       display: block;
       width: 40px;
       height: 22px;
-      border-left: 5px solid #fff;
-      border-bottom: 5px solid #fff;
+      border-left: 5px solid var(--color-accent);
+      border-bottom: 5px solid var(--color-accent);
       transform: rotate(-45deg) translate(3px, -4px);
       border-bottom-left-radius: 2px;
+    }
+
+    .contact__success-panel {
+      width: 100%;
+      background: #FFF6F2;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
     }
 
     .contact__success-title {
@@ -497,6 +511,14 @@
       .navbar-outer {
         padding: 12px 16px;
       }
+
+      .contact__layout {
+        gap: 40px;
+      }
+
+      .contact__title {
+        font-size: 64px;
+      }
     }
 
     @media (max-width: 768px) {
@@ -548,28 +570,22 @@
         padding: 40px 0 72px;
       }
 
-      .contact__heading {
-        justify-content: flex-start;
-        margin-bottom: 24px;
+      .contact__layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
       }
 
       .contact__title {
-        font-size: clamp(48px, 9vw, 72px);
+        font-size: clamp(48px, 9vw, 64px);
       }
 
-      .contact__title__row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      .contact__desc {
+      .contact__intro-desc {
         max-width: 100%;
-        padding-bottom: 0;
       }
 
       .contact__card {
         padding: 32px 24px;
+        max-width: 100%;
       }
 
       .footer__inner {
@@ -622,42 +638,49 @@
   <!-- ══ CONTACT ══ -->
   <main class="contact">
     <div class="container">
-      <div class="contact__heading">
-        <h1 class="contact__title">
-          <span class="contact__title__line">與 OneAD 展開</span>
-          <span class="contact__title__row">
+      <div class="contact__layout">
+        <div class="contact__intro">
+          <h1 class="contact__title">
+            <span class="contact__title__line">與 OneAD 展開</span>
             <span class="contact__title__line">下一步合作</span>
-            <span class="contact__desc">請選擇洽詢主題並填寫相關資訊，我們將依據您提供的內容安排對應窗口協助，讓您的需求能更快速地被確認與處理。</span>
-          </span>
-        </h1>
-      </div>
+          </h1>
+          <p class="contact__intro-desc">
+            OneAD 是一家以 AI 為核心的廣告科技公司，結合 OneDATA 的多維數據智能，打造科技賦能的智慧行銷解決方案，協助品牌行銷人在快速變動的數位環境中持續領先。
+          </p>
+        </div>
 
-      <div class="contact__card">
-        <!-- Form (initial state) -->
-        <form class="contact__form" id="contactForm" novalidate>
-          <select class="contact__field" name="topic" required>
-            <option value="" disabled selected>我想瞭解的主題是</option>
-            <option value="advertising">廣告投放與策略</option>
-            <option value="media">媒體合作</option>
-            <option value="tech">技術整合</option>
-            <option value="partnership">成為合作夥伴</option>
-            <option value="other">其他</option>
-          </select>
-          <input class="contact__field" type="text" name="name" placeholder="姓名（必填）*" required>
-          <input class="contact__field" type="email" name="email" placeholder="電子信箱（必填）*" required>
-          <input class="contact__field" type="text" name="company" placeholder="公司名稱（必填）*" required>
-          <input class="contact__field" type="text" name="need" placeholder="您的需要（必填）*" required>
-          <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
-          <div class="contact__submit-row">
-            <button type="submit" class="btn btn--accent">送出資料</button>
+        <div class="contact__card">
+          <!-- Form (initial state) -->
+          <form class="contact__form" id="contactForm" novalidate>
+            <p class="contact__form-intro">
+              請選擇洽詢主題並填寫相關資訊，我們將依據您提供的內容安排對應窗口協助，讓您的需求能更快速地被確認與處理。
+            </p>
+            <select class="contact__field" name="topic" required>
+              <option value="" disabled selected>我想瞭解的主題是</option>
+              <option value="advertising">廣告投放與策略</option>
+              <option value="media">媒體合作</option>
+              <option value="tech">技術整合</option>
+              <option value="partnership">成為合作夥伴</option>
+              <option value="other">其他</option>
+            </select>
+            <input class="contact__field" type="text" name="name" placeholder="姓名（必填）*" required>
+            <input class="contact__field" type="email" name="email" placeholder="電子信箱（必填）*" required>
+            <input class="contact__field" type="text" name="company" placeholder="公司名稱（必填）*" required>
+            <input class="contact__field" type="text" name="need" placeholder="您的需要（必填）*" required>
+            <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
+            <div class="contact__submit-row">
+              <button type="submit" class="btn btn--accent">送出資料</button>
+            </div>
+          </form>
+
+          <!-- Success (hidden initially) -->
+          <div class="contact__success" id="contactSuccess" hidden>
+            <div class="contact__check" aria-hidden="true"></div>
+            <div class="contact__success-panel">
+              <h2 class="contact__success-title">我們已收到您的需求</h2>
+              <p class="contact__success-desc">OneAD 團隊將盡快確認內容<br>並由合適窗口與您聯繫</p>
+            </div>
           </div>
-        </form>
-
-        <!-- Success (hidden initially) -->
-        <div class="contact__success" id="contactSuccess" hidden>
-          <div class="contact__check" aria-hidden="true"></div>
-          <h2 class="contact__success-title">我們已收到您的需求</h2>
-          <p class="contact__success-desc">OneAD 團隊將盡快確認內容<br>並由合適窗口與您聯繫</p>
         </div>
       </div>
     </div>
@@ -730,6 +753,7 @@
       }
       form.hidden = true;
       success.hidden = false;
+      document.querySelector('.contact__card').classList.add('is-success');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>

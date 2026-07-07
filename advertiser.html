@@ -11,7 +11,8 @@
       --dark: #111111;
       --gray: #666666;
       --light: #999999;
-      --bg-light: #f6f5f3;
+      --bg-light: #edefef;         /* 灰色底 (羅小姐指定) */
+      --color-heading: #595757;    /* 標題色 (羅小姐指定) */
       --white: #ffffff;
       --max-w: 1200px;
 
@@ -35,6 +36,15 @@
       --font-family-heading: 'Nunito Sans', 'Noto Sans TC', 'Microsoft JhengHei', '微軟正黑體', sans-serif;
       --duration-fast: 150ms;
       --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+      /* ── Typography Spec 0702 (行銷 羅小姐規範) ── */
+      /* H1 = 56px / 800 / 1.15 / -0.03em  (Mobile 32px) · Hero 主標 (每頁唯一) */
+      /* H2 = 48px / 700 / 1.25 / -0.01em  (Mobile 26px) · 區塊主標 */
+      /* H3 = 28px / 700 / 1.35 / 0        (Mobile 22px) · 子區塊標題 */
+      /* H4 = 20px / 600 / 1.4             (Mobile 18px) · 卡片標題 */
+      /* H5 = 16px / 600 / 1.5 / +0.01em   (Mobile 15px) · 小標題 */
+      /* P  = 16px / 400 / 1.75 */
+      /* Button = 15px / 600 */
     }
 
     *,
@@ -72,7 +82,7 @@
       padding: 0 48px;
     }
 
-    /* ── BUTTON (對齊 design-system.html) ── */
+    /* ── BUTTON (Typography Spec: 15px) ── */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -81,7 +91,7 @@
       padding: 12px 32px;
       border-radius: var(--radius-pill);
       font-family: var(--font-family-heading);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       letter-spacing: 0.5px;
       line-height: 1;
@@ -147,7 +157,7 @@
       pointer-events: auto;
       width: 100%;
       max-width: 960px;
-      height: 64px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -156,7 +166,7 @@
       -webkit-backdrop-filter: blur(15px);
       backdrop-filter: blur(15px);
       border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 16px;
+      border-radius: 40px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
       font-family: Arial, sans-serif;
     }
@@ -243,19 +253,22 @@
       object-fit: cover;
     }
 
+    /* H1 · 56px / 800 / 1.15 / -0.03em (Mobile 32px) */
     .ad-hero__title {
-      font-size: clamp(32px, 3.4vw, 44px);
-      font-weight: 900;
-      color: var(--dark);
-      line-height: 1.3;
-      letter-spacing: -0.5px;
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 800;
+      color: var(--color-heading);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
       margin-bottom: 24px;
     }
 
+    /* P · 16px / 400 / 175% */
     .ad-hero__body {
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 400;
       color: var(--gray);
-      line-height: 1.95;
+      line-height: 1.75;
       margin-bottom: 32px;
     }
 
@@ -265,12 +278,13 @@
       background: var(--bg-light);
     }
 
+    /* H2 · 48px / 700 / 1.25 / -0.01em (Mobile 26px) */
     .cores__heading {
-      font-size: clamp(34px, 4.2vw, 52px);
-      font-weight: 900;
-      color: var(--dark);
-      letter-spacing: -1px;
-      line-height: 1.2;
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
       margin-bottom: 56px;
       text-align: center;
     }
@@ -298,46 +312,52 @@
     }
 
     .core__body {
-      padding: 40px 28px 24px;
-      position: relative;
+      padding: 32px 28px 24px;
     }
 
+    /* 卡片編號 · 88px 實色 #ff6546 (羅小姐指定)，浮動於左側讓 H3/P 環繞 */
     .core__num {
-      position: absolute;
-      top: 8px;
-      left: 18px;
+      float: left;
       font-size: 88px;
       font-weight: 900;
-      color: rgba(255, 101, 70, .25);
-      line-height: 1;
+      color: #ff6546;
+      line-height: 0.9;
       font-family: 'Arial Black', Arial, sans-serif;
-      pointer-events: none;
+      margin-right: 16px;
       user-select: none;
     }
 
+    /* H3 · 28px / 700 / 1.35 / 0 (Mobile 22px) */
     .core__title {
-      position: relative;
-      font-size: 18px;
+      font-size: clamp(22px, 2.2vw, 28px);
       font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 4px;
-      letter-spacing: -0.3px;
+      color: var(--color-heading);
+      margin-bottom: 8px;
+      line-height: 1.35;
+      letter-spacing: 0;
     }
 
     .core__subtitle {
-      position: relative;
       font-size: 16px;
       font-weight: 700;
-      color: var(--dark);
+      color: var(--color-heading);
       margin-bottom: 18px;
       letter-spacing: -0.3px;
     }
 
+    /* P · 16px / 400 / 175% */
     .core__desc {
-      position: relative;
-      font-size: 14px;
+      font-size: 16px;
+      font-weight: 400;
       color: var(--gray);
-      line-height: 1.85;
+      line-height: 1.75;
+    }
+
+    /* 清除浮動 · 避免影響下方圖片區塊 */
+    .core__body::after {
+      content: '';
+      display: block;
+      clear: both;
     }
 
     .core__desc strong {
@@ -364,12 +384,13 @@
       overflow: hidden;
     }
 
+    /* H2 · 48px / 700 / 1.25 / -0.01em (Mobile 26px) */
     .brands__heading {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--dark);
-      letter-spacing: -0.5px;
-      line-height: 1.2;
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
       margin-bottom: 48px;
       text-align: center;
     }
@@ -381,10 +402,14 @@
       overflow: hidden;
     }
 
+    /* UL · 品牌列表 */
     .brand-row {
       display: flex;
       width: max-content;
       gap: 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
       animation: scrollLeft 38s linear infinite;
       animation-play-state: paused;
     }
@@ -413,12 +438,15 @@
       100% { transform: translateX(0); }
     }
 
+    /* LI · 品牌項目 (羅小姐指定 · 等寬、圓 icon 靠左、文字置中) */
     .pill {
       flex-shrink: 0;
-      display: inline-flex;
+      position: relative;
+      width: 180px;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 12px 26px;
+      justify-content: center;
+      padding: 12px 20px;
       background: #fafaf8;
       border-radius: 100px;
       font-size: 14px;
@@ -426,9 +454,15 @@
       color: #333;
       box-shadow: 0 2px 8px rgba(0, 0, 0, .06), inset 0 1px 0 rgba(255, 255, 255, .8);
       white-space: nowrap;
+      list-style: none;
     }
 
+    /* 圓 icon 絕對定位靠左，不影響文字置中 */
     .pill__icon {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -443,7 +477,7 @@
     .pill__icon img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
 
     /* 文字 fallback(沒有 logo 檔的品牌) */
@@ -668,6 +702,12 @@
         height: 240px;
       }
 
+      /* RWD Mobile 字級規範 · H1=32px / H2=26px / H3=22px */
+      .ad-hero__title { font-size: 32px; }
+      .cores__heading { font-size: 26px; }
+      .brands__heading { font-size: 26px; }
+      .core__title { font-size: 22px; }
+
       .cores {
         padding: 56px 0;
       }
@@ -722,16 +762,19 @@
     <div class="container">
       <div class="ad-hero__grid">
         <div class="ad-hero__photo">
-          <img src="images/Advertisers-hero.png" alt="OneAD 合作客戶">
+          <img src="images/Advertisers-hero-0702.png" alt="OneAD 合作客戶">
         </div>
         <div class="ad-hero__content">
+          <!-- H1 · 56px / 800 / 1.15 / -0.03em -->
           <h1 class="ad-hero__title">
-            成為 OneAD 合作客戶<br>
+            成為 OneAD 合作客戶
             啟動 AI 驅動的增長引擎，重塑行銷效益
           </h1>
+          <!-- P · 16px / 400 / 175% -->
           <p class="ad-hero__body">
             身為台灣領先的 AI 廣告科技大腦，OneAD 運用運算智能與深度機器學習，將碎裂的數據轉化為具備「預測力」的獲客指標。我們不只跨媒體，更跨越決策邊界，在消費者的意圖萌發瞬間，為品牌精準編排每一次的高感度連結。
           </p>
+          <!-- Button · 15px / 600 -->
           <a href="#" class="btn btn--accent">立即預約策略諮詢</a>
         </div>
       </div>
@@ -741,6 +784,7 @@
   <!-- ══ THREE CORES ══ -->
   <section class="cores">
     <div class="container">
+      <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
       <h2 class="cores__heading">三大智能核心，全面強化你的廣告競爭力</h2>
 
       <div class="cores__grid">
@@ -749,14 +793,16 @@
         <article class="core">
           <div class="core__body">
             <span class="core__num">1</span>
+            <!-- H3 · 28px / 700 / 1.35 -->
             <h3 class="core__title">意圖預測模型</h3>
             <p class="core__subtitle">讓每一分預算都具備進化能力</p>
+            <!-- P · 16px / 400 / 175% -->
             <p class="core__desc">
               從「回顧過去」轉向「預測未來」。我們不僅整合一、二、三方數據，更透過 AI 深度解析受眾的潛在行為訊號。從投放前的智慧受眾畫像（Audience AI）到投放中的動態優化，AI 將資源流向最具轉化潛力的節點，確保預算發揮超常效能。
             </p>
           </div>
           <div class="core__img">
-            <img src="images/Advertisers-1.png" alt="意圖預測模型">
+            <img src="images/Advertisers-1-0702.png" alt="意圖預測模型">
           </div>
         </article>
 
@@ -764,14 +810,16 @@
         <article class="core">
           <div class="core__body">
             <span class="core__num">2</span>
+            <!-- H3 · 28px / 700 / 1.35 -->
             <h3 class="core__title">跨媒體平台布局</h3>
             <p class="core__subtitle">在動態旅程中實現無縫對話</p>
+            <!-- P · 16px / 400 / 175% -->
             <p class="core__desc">
               應對非線性、破碎化的消費者軌跡。現代消費者的路徑是跳躍的。OneAD 以 AI 為中樞，跨越聯播網、影音與社群版位，進行全通路的實時佈局（Omnichannel Orchestration）。我們確保品牌訊息能在最合適的脈絡（Context）下現身，將破碎的接觸點串聯成可積累的品牌體驗。
             </p>
           </div>
           <div class="core__img">
-            <img src="images/Advertisers-2.png" alt="跨媒體平台布局">
+            <img src="images/Advertisers-2-0702.png" alt="跨媒體平台布局">
           </div>
         </article>
 
@@ -779,14 +827,16 @@
         <article class="core">
           <div class="core__body">
             <span class="core__num">3</span>
-            <h3 class="core__title">500+ 品牌的實戰智慧</h3>
+            <!-- H3 · 28px / 700 / 1.35 -->
+            <h3 class="core__title">品牌的實戰智慧</h3>
             <p class="core__subtitle">結合 AI 賦能的策略洞察</p>
+            <!-- P · 16px / 400 / 175% -->
             <p class="core__desc">
               機器學習的深度，來自產業經驗的實戰積累。我們擁有超過 500 家頂尖品牌的服務經驗，這些海量真實數據構成了我們強大的產業領航模型。我們提供的不是通用的解決方案，而是結合 AI 算力與資深顧問直覺的「進攻策略」——確保技術落地，精準擊中市場痛點。
             </p>
           </div>
           <div class="core__img">
-            <img src="images/Advertisers-3.png" alt="500+ 品牌實戰智慧">
+            <img src="images/Advertisers-3-0702.png" alt="500+ 品牌實戰智慧">
           </div>
         </article>
 
@@ -797,60 +847,59 @@
   <!-- ══ BRAND WALL ══ -->
   <section class="brands">
     <div class="container">
+      <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
       <h2 class="brands__heading">與頂尖品牌並肩，共創行銷價值</h2>
     </div>
 
     <div class="brand-rows">
-      <!-- Row 1 -->
-      <div class="brand-row">
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+      <!-- UL · Row 1 -->
+      <ul class="brand-row">
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.png" alt="Tempo得寶"></span>Tempo得寶</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
         <!-- duplicate -->
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
-      </div>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.png" alt="Tempo得寶"></span>Tempo得寶</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
+      </ul>
 
-      <!-- Row 2 (reverse) -->
-      <div class="brand-row brand-row--reverse brand-row--slow">
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/ONEAD.png" alt="ONEAD"></span>ONEAD</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</span>
+      <!-- UL · Row 2 (reverse) -->
+      <ul class="brand-row brand-row--reverse brand-row--slow">
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</li>
         <!-- duplicate -->
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/ONEAD.png" alt="ONEAD"></span>ONEAD</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</span>
-      </div>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/愛之味.png" alt="愛之味"></span>愛之味</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/添寧.png" alt="添寧"></span>添寧</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon pill__icon--yichenjing">淨</span>一塵淨</li>
+      </ul>
 
-      <!-- Row 3 -->
-      <div class="brand-row">
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
+      <!-- UL · Row 3 -->
+      <ul class="brand-row">
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.png" alt="Tempo得寶"></span>Tempo得寶</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
         <!-- duplicate -->
-        <span class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.webp" alt="Tempo得寶"></span>Tempo得寶</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</span>
-        <span class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</span>
-      </div>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/曼黛瑪璉.jpg" alt="曼黛瑪璉"></span>曼黛瑪璉</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/興農集團.png" alt="興農集團"></span>興農集團</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Tempo得寶.png" alt="Tempo得寶"></span>Tempo得寶</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/vivo-1.svg" alt="Vivo"></span>Vivo</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/Rado_logo.svg" alt="RADO"></span>RADO</li>
+        <li class="pill"><span class="pill__icon"><img src="images/logo/小林眼鏡.jpg" alt="小林眼鏡"></span>小林眼鏡</li>
+      </ul>
     </div>
   </section>
 
