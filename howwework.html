@@ -201,7 +201,10 @@
       object-fit: cover;
     }
 
-    /* ══ WHAT DEFINES US (灰底 · 大圓 + 弧形特質列表 · 羅小姐堅持排版) ══ */
+    /* ══ WHAT DEFINES US (灰底 · 大圓 + 弧形特質列表 · 行銷人員需求排版) ══ */
+    /* 排版策略 · 圓 + 5 個 trait 弧形排列在圓的右緣 */
+    /* 因 CSS 無法算圓弧座標，改用 JS 在載入/resize 時動態計算 */
+    /* 見 <script> 內的 arrangeTraitsOnArc()。JS 失效時退回下方 CSS fallback */
     .what-defines {
       padding: 96px 0;
       background: var(--bg-light);
@@ -209,9 +212,8 @@
       overflow: hidden;
     }
 
-    /* 實心白色大圓（羅小姐堅持排版）*/
-    .what-defines::before {
-      content: '';
+    /* 實心白色大圓（真實 DOM 元素，供 JS 量測與定位）*/
+    .what-defines__circle {
       position: absolute;
       width: 900px;
       height: 900px;
@@ -270,7 +272,8 @@
       align-items: flex-start;
     }
 
-    /* 弧形排列：中間最右、上下兩端最左，弧口朝左 */
+    /* 弧形排列 CSS fallback (JS 失效時的預設值 · 對齊 1600px+ 桌機) */
+    /* JS 會用 inline style transform 覆蓋這些值 */
     .trait:nth-child(1) { transform: translateX(0px); }
     .trait:nth-child(2) { transform: translateX(56px); }
     .trait:nth-child(3) { transform: translateX(72px); }
@@ -592,7 +595,8 @@
         opacity: 0.5;
       }
       .cta-bottom__text { max-width: 100%; }
-      .what-defines::before { display: none; }
+      .what-defines__circle { display: none; }
+      .trait { transform: none !important; }  /* mobile 取消弧形位移，改為左對齊 */
       .cards { grid-template-columns: 1fr; }
 
       /* RWD Mobile 字級規範 · H1=32px / H2=26px / H3=22px */
@@ -655,6 +659,8 @@
 
   <!-- ══ WHAT DEFINES US ══ -->
   <section class="what-defines">
+    <!-- 白色大圓 (由 JS 動態量測與定位，5 個 trait 貼著右緣呈弧形) -->
+    <div class="what-defines__circle" aria-hidden="true"></div>
     <div class="container">
       <div class="what-defines__grid">
         <div>
@@ -896,6 +902,7 @@
   </footer>
 
   <script>
+    /* Hamburger nav */
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
@@ -908,6 +915,81 @@
         navLinks.classList.remove('open');
       });
     });
+
+    /* ── 弧形排列 · 讓 5 個 trait 貼著大圓右緣 (RWD safe) ─────────────── */
+    /* 邏輯：先量 traits 列的實際高度 → 決定圓直徑 (list 高度 × 1.35) */
+    /* 把圓心放在 traits icon 直行的左側，剛好讓中間點 (第 3) 突出 overshoot px */
+    /* 其他 4 點用 x = cx + √(r² - dy²) 貼上圓弧 */
+    (function () {
+      const section = document.querySelector('.what-defines');
+      if (!section) return;
+      const circle  = section.querySelector('.what-defines__circle');
+      const list    = section.querySelector('.traits');
+      const traits  = section.querySelectorAll('.trait');
+      if (!circle || !list || !traits.length) return;
+
+      const OVERSHOOT_RATIO = 0.18; /* 中間點凸出的量 = 半徑 × 0.18 (可微調) */
+      const CIRCLE_SLACK    = 1.35; /* 圓直徑 = traits list 高度 × 1.35 (預留 top/bottom 邊距) */
+
+      function arrange() {
+        /* 手機 (≤768px) CSS 已 display:none 圓，直接清 transform 即回歸左對齊 */
+        if (getComputedStyle(circle).display === 'none') {
+          traits.forEach(t => t.style.transform = '');
+          return;
+        }
+
+        /* 1. reset：讓 traits 回到自然位置，方便量測 */
+        traits.forEach(t => t.style.transform = 'translateX(0)');
+        circle.style.width = circle.style.height = '';
+        circle.style.left  = circle.style.top   = '';
+        circle.style.transform = '';
+
+        /* 2. 量測 */
+        const sectRect = section.getBoundingClientRect();
+        const listRect = list.getBoundingClientRect();
+        const firstIcon = traits[0].querySelector('.trait__num').getBoundingClientRect();
+        const iconNaturalX = firstIcon.left + firstIcon.width / 2;
+        const listCenterY  = listRect.top + listRect.height / 2;
+
+        /* 3. 計算圓大小與位置 */
+        const diameter = Math.max(listRect.height * CIRCLE_SLACK, 480);
+        const r = diameter / 2;
+        const overshoot = r * OVERSHOOT_RATIO;
+        const cx = iconNaturalX - r + overshoot; /* 圓心 X (視窗座標) */
+        const cy = listCenterY;                  /* 圓心 Y (視窗座標) */
+
+        /* 4. 套用圓的樣式 (絕對定位於 section 內) */
+        circle.style.width  = diameter + 'px';
+        circle.style.height = diameter + 'px';
+        circle.style.left   = (cx - sectRect.left - r) + 'px';
+        circle.style.top    = (cy - sectRect.top  - r) + 'px';
+        circle.style.transform = 'none';
+
+        /* 5. 逐一算每個 trait 的 translateX 讓 icon 貼到圓弧上 */
+        traits.forEach(trait => {
+          const iconEl = trait.querySelector('.trait__num');
+          const iRect  = iconEl.getBoundingClientRect();
+          const iCx    = iRect.left + iRect.width / 2;
+          const iCy    = iRect.top  + iRect.height / 2;
+          const dy     = iCy - cy;
+          if (Math.abs(dy) > r) { trait.style.transform = ''; return; }
+          const targetX = cx + Math.sqrt(r * r - dy * dy);
+          trait.style.transform = 'translateX(' + (targetX - iCx) + 'px)';
+        });
+      }
+
+      /* 綁 load / resize；resize 用 requestAnimationFrame 節流 */
+      let rafId = null;
+      const schedule = () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(arrange);
+      };
+      window.addEventListener('load', arrange);
+      window.addEventListener('resize', schedule);
+      /* 字型載入完成後也要重算 (影響 traits 高度) */
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(arrange);
+      arrange();
+    })();
   </script>
 
 </body>
