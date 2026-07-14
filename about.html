@@ -179,9 +179,14 @@
     .hero-about__content {
       position: relative;
       z-index: 2;
-      max-width: 560px;
-      margin-left: 60px;
+      max-width: 1200px;
       margin-top: 40px;
+    }
+    /* 按鈕置右 (羅小姐堅持) */
+    .hero-about__content > .btn {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
     }
     /* H1 · 56/32px */
     .hero-about__heading {
@@ -329,7 +334,7 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: linear-gradient(135deg, rgba(255, 101, 70, .95), rgba(224, 86, 60, .95));
+      background: linear-gradient(135deg, rgba(102, 102, 102, .95), rgba(89, 87, 87, .95));
       color: #fff;
       text-align: center;
       opacity: 0;
@@ -625,46 +630,41 @@
       margin: 0 auto;
       padding: 20px 0;
     }
-    /* 中央線 */
+    /* 中央線 · 細灰線 (羅小姐 mockup 版) */
     .timeline::before {
       content: '';
       position: absolute;
       top: 0;
       bottom: 0;
       left: 50%;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--orange) 8%, var(--orange) 92%, transparent);
-      transform: translateX(-1px);
+      width: 1px;
+      background: #cfd1d1;
+      transform: translateX(-.5px);
     }
     .tl-item {
       position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-      padding: 20px 0;
+      column-gap: 40px;
+      row-gap: 16px;
+      align-items: start;
+      padding: 32px 0;
     }
-    /* 圓點 */
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: var(--orange);
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 0 5px rgba(255, 101, 70, .18);
-      z-index: 2;
-    }
-    /* 年份 · H3 48px 特化 */
+    /* 羅小姐 mockup 版 · 不放圓點 */
+    /* 年份 · H3 48px 特化 · 橫跨兩欄、置中壓在中央線上並「切斷」線條 */
     .tl-year {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      justify-self: center;              /* 收縮到內容寬度並置中 */
+      padding: 4px 28px;                 /* 左右預留白 → 遮住線 */
+      background: var(--white);          /* 用區塊背景色蓋掉線,造成斷開視覺 */
       font-size: clamp(32px, 3.6vw, 48px);
       font-weight: 800;
       color: var(--orange);
       line-height: 1;
       letter-spacing: -0.02em;
+      position: relative;
+      z-index: 2;
     }
     .tl-body {
       color: var(--gray);
@@ -685,17 +685,15 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--orange);
+      background: var(--gray);
     }
     .tl-body li strong {
       color: var(--color-heading);
       font-weight: 700;
     }
-    /* 左右對齊 */
-    .tl-item--right .tl-year { text-align: right; padding-right: 48px; }
-    .tl-item--right .tl-body { padding-left: 48px; }
-    .tl-item--left .tl-year { grid-column: 2; padding-left: 48px; }
-    .tl-item--left .tl-body { grid-column: 1; grid-row: 1; padding-right: 48px; text-align: right; }
+    /* 內文放在年份下方，左右交錯 */
+    .tl-item--right .tl-body { grid-column: 2; grid-row: 2; padding-left: 32px; }
+    .tl-item--left  .tl-body { grid-column: 1; grid-row: 2; padding-right: 32px; text-align: right; }
     .tl-item--left .tl-body li { padding-left: 0; padding-right: 18px; }
     .tl-item--left .tl-body li::before { left: auto; right: 0; }
 
@@ -867,7 +865,6 @@
 
       /* Mobile Timeline · 全部靠左 */
       .timeline::before { left: 12px; }
-      .tl-item::before { left: 12px; top: 36px; }
       .tl-item {
         grid-template-columns: 1fr;
         gap: 8px;
@@ -1175,7 +1172,6 @@
     <div class="container">
       <div class="milestone__head">
         <h2 class="milestone__heading">關鍵<em>里程碑</em></h2>
-        <p class="milestone__sub">從 2010 到 2025，我們持續以技術與創新，寫下台灣廣告科技的每一個關鍵時刻。</p>
       </div>
 
       <div class="timeline">
