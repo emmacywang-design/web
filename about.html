@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>關於 OneAD | OneAD</title>
+  <style>
+    :root {
+      --orange: #FF6546;
+      --dark: #111111;
+      --gray: #666666;
+      --light: #999999;
+      --bg-light: #edefef;         /* 灰色底 (羅小姐 0702 規範) */
+      --color-heading: #595757;    /* 標題色 (羅小姐 0702 規範) */
+      --white: #ffffff;
+      --max-w: 1200px;
+
+      /* ── Typography Spec 0702 (行銷 羅小姐規範) ──
+         H1 = 56/32px · 800 · 1.15 · -0.03em
+         H2 = 48/26px · 700 · 1.25 · -0.01em
+         H3 = 28/22px · 700 · 1.35 · 0
+         H4 = 20/18px · 600 · 1.4
+         H5 = 16/15px · 600 · 1.5 · +0.01em
+         P  = 16px    · 400 · 1.75
+         Button = 15px · 600
+      */
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── BUTTON (Typography Spec: 15px) ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .25s;
+      border: 2px solid transparent;
+      line-height: 1;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+    }
+    .btn-primary:hover { background: #e0563c; border-color: #e0563c; }
+    .btn-outline {
+      background: transparent;
+      color: var(--orange);
+      border-color: var(--orange);
+    }
+    .btn-outline:hover { background: var(--orange); color: #fff; }
+
+    /* ── NAVBAR (與 howwework 完全一致) ── */
+    .navbar-outer {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 12px 24px;
+      pointer-events: none;
+    }
+    .navbar {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 960px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      background: rgba(255, 255, 255, 0.8);
+      -webkit-backdrop-filter: blur(15px);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      font-family: Arial, sans-serif;
+    }
+    .navbar__logo img { display: block; width: 130px; height: 20px; }
+    .navbar__links { display: flex; list-style: none; gap: 40px; }
+    .navbar__links a {
+      display: block;
+      font-size: 15.6px;
+      color: #141414;
+      letter-spacing: -0.1px;
+      line-height: 1;
+      transition: color .2s;
+      white-space: nowrap;
+    }
+    .navbar__links a:hover { color: var(--orange); }
+    .navbar__links a.active { color: var(--orange); font-weight: 600; }
+    .navbar__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .navbar__hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #141414;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+    .navbar__hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navbar__hamburger.active span:nth-child(2) { opacity: 0; }
+    .navbar__hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* 每個 section 佔滿螢幕高度（延續羅小姐指定） */
+    .hero-about,
+    .leadership,
+    .tech-trust,
+    .milestone,
+    .cta-bottom {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ══════════════════════════════════════
+       Section 1 · HERO · About OneAD
+       ══════════════════════════════════════ */
+    .hero-about {
+      padding: 80px 0 96px;
+      overflow: hidden;
+    }
+    /* 灰白巨型圓 · 左上 · 只露出右下弧線 */
+    .hero-about__circle {
+      position: absolute;
+      top: -35vw;
+      left: -18vw;
+      width: 92vw;
+      height: 92vw;
+      max-width: 1400px;
+      max-height: 1400px;
+      background: var(--bg-light);
+      border-radius: 50%;
+      z-index: 0;
+    }
+    .hero-about__content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+      margin-left: 60px;
+      margin-top: 40px;
+    }
+    /* H1 · 56/32px */
+    .hero-about__heading {
+      font-size: clamp(32px, 4vw, 56px);
+      font-weight: 800;
+      color: var(--color-heading);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .hero-about__heading span { color: var(--color-heading); }
+    .hero-about__heading small {
+      display: inline-block;
+      font-size: 0.5em;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+    /* P · 16px / 400 / 1.75 */
+    .hero-about__body {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* ══════════════════════════════════════
+       Section 2 · LEADERSHIP · OneAD 管理團隊
+       版型：白底置中，4×3 網格，姓名疊放
+       ══════════════════════════════════════ */
+    .leadership {
+      padding: 96px 0;
+      background: var(--bg-light);
+    }
+    .leadership__head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    /* H2 · 48/26px */
+    .leadership__heading {
+      font-size: clamp(26px, 3.4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      text-indent: -0.04em;      /* 光學對齊：讓 O 的圓弧邊緣切齊下方照片左緣 */
+    }
+    .leadership__heading em {
+      font-style: normal;
+      color: var(--color-heading);
+      display: inline-block;
+    }
+    .leadership__heading .zh {
+      display: inline-block;
+      font-size: 0.55em;
+      font-weight: 700;
+      color: var(--color-heading);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+    .leadership__subtitle {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.75;
+      max-width: 440px;
+    }
+
+    /* ── 4 / 5 / 5 列容器（羅小姐指定）
+       每一列自己有 photos 網格 + expand 展開區 ── */
+    .leadership__rows { display: flex; flex-direction: column; gap: 10px; }
+    .leadership__row  { display: flex; flex-direction: column; gap: 10px; }
+
+    .leadership__photos { display: grid; gap: 10px; align-items: start; grid-auto-flow: row; }
+    .leadership__row--r1 .leadership__photos { grid-template-columns: repeat(4, 1fr); }
+    .leadership__row--r2 .leadership__photos,
+    .leadership__row--r3 .leadership__photos { grid-template-columns: repeat(5, 1fr); }
+
+    /* 卡片：button 元素，可點擊 */
+    .leader-card {
+      position: relative;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      background: var(--bg-light);
+      border-radius: 2px;
+      border: none;
+      padding: 0;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: opacity .4s ease, transform .4s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform, opacity;
+    }
+    .leader-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform .5s ease;
+    }
+    .leader-card:hover img { transform: scale(1.04); }
+
+    /* 姓名疊放於卡片左下 · H3 級橘字 + 白色職稱 */
+    .leader-card__caption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 14px 16px 16px;
+      background: linear-gradient(to top, rgba(0, 0, 0, .55) 0%, rgba(0, 0, 0, .15) 70%, transparent 100%);
+      z-index: 2;
+      transition: opacity .3s;
+    }
+    .leader-card__name {
+      font-size: clamp(18px, 1.6vw, 20px);
+      font-weight: 600;
+      line-height: 1.4;
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+    }
+    .leader-card__name em {
+      font-style: normal;
+      margin-left: 4px;
+    }
+    .leader-card__title {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      line-height: 1.4;
+      margin-top: 2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+    }
+
+    /* Hover 一句話浮層 (羅小姐指定：滑鼠移上出現一句話) */
+    .leader-card__quote {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(255, 101, 70, .95), rgba(224, 86, 60, .95));
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+      transition: opacity .35s ease;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .leader-card__quote-text {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+    }
+    .leader-card__quote-hint {
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 500;
+      opacity: .9;
+      letter-spacing: 0.1em;
+    }
+    @media (hover: hover) {
+      .leader-card:hover .leader-card__quote { opacity: 1; }
+      .leader-card:hover .leader-card__caption { opacity: 0; }
+    }
+    /* 被點開時：關閉 hover 引言，不加外框 */
+    .leader-card.is-active .leader-card__quote { opacity: 0; }
+
+    /* 展開列 · Ogilvy 樣式：卡片移到 col 1，面板佔 col 2..end (與卡片同高) */
+    .leadership__expand {
+      display: none;
+      background: var(--white);
+      border-radius: 0 2px 2px 0;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    /* 展開時 · 卡片與面板貼齊 (gap 收為 0) */
+    .leadership__row.is-open .leadership__photos { gap: 0; }
+    .leadership__expand__inner {
+      height: 100%;
+      overflow-y: auto;
+      padding: 40px 48px 40px 44px;
+      position: relative;
+      box-sizing: border-box;
+      animation: bioSlideIn .5s cubic-bezier(.22, 1, .36, 1) both;
+      animation-delay: .12s;
+    }
+    @keyframes bioSlideIn {
+      from { opacity: 0; transform: translateX(-32px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .leadership__row.is-open .leadership__expand {
+      display: block;
+      grid-column: 2 / -1;
+      grid-row: 1;
+    }
+    .leadership__row.is-open .leader-card.is-active {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    /* 展開時 · 同一列內的其他卡片淡出並堆疊到 (1,1) 底層 (不推到第二列) */
+    .leadership__row.is-open .leader-card:not(.is-active) {
+      opacity: 0;
+      transform: scale(.88);
+      pointer-events: none;
+      grid-column: 1;
+      grid-row: 1;
+      z-index: 0;
+    }
+    .leadership__row.is-open .leader-card.is-active {
+      z-index: 2;
+    }
+    .bio-panel__name {
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+    .bio-panel__name em {
+      font-style: normal;
+      color: var(--orange);
+      margin-left: 8px;
+    }
+    .bio-panel__title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .bio-panel__quote {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--orange);
+      padding: 8px 14px;
+      background: rgba(255, 101, 70, .08);
+      border-left: 3px solid var(--orange);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+    .bio-panel__body {
+      font-size: 16px;
+      font-weight: 400;
+      color: #444;
+      line-height: 1.75;
+    }
+    .bio-panel__body p { margin-bottom: 12px; }
+    .bio-panel__body h4 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--color-heading);
+      margin: 24px 0 12px;
+    }
+    .bio-panel__body ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .bio-panel__body li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 6px;
+    }
+    .bio-panel__body li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--orange);
+      font-size: 10px;
+      line-height: 1.75;
+    }
+    .bio-panel__close {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      background: none;
+      border: 1.5px solid var(--gray);
+      color: var(--gray);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      z-index: 2;
+    }
+    .bio-panel__close:hover {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+    }
+
+    /* 最後一格：Join Us 便利貼 CTA (直接放圖) */
+    .leader-card--cta {
+      position: relative;
+      background: transparent;
+      overflow: hidden;
+      transition: transform .3s ease;
+      text-decoration: none;
+    }
+    .leader-card--cta:hover { transform: translateY(-6px); }
+    .leader-card--cta img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ══════════════════════════════════════
+       Section 3 · TECH & TRUST · 以技術驅動突破
+       版型：白底，橘色自由漂動，證書卡片置中
+       ══════════════════════════════════════ */
+    .tech-trust {
+      background: var(--white);
+      padding: 120px 0;
+      overflow: hidden;
+    }
+    .tech-trust__inner { position: relative; z-index: 1; }
+    /* H2 · 48/26px */
+    .tech-trust__heading {
+      font-size: clamp(26px, 3.4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .tech-trust__heading em {
+      font-style: normal;
+      color: var(--color-heading);
+    }
+    /* Carousel · 水平滑動 + 左右鍵 */
+    .tech-trust__carousel { position: relative; }
+    .tech-trust__viewport {
+      overflow: hidden;
+      max-width: 1030px;
+      margin: 0 auto;
+    }
+    .tech-trust__track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 12px 4px;
+    }
+    .tech-trust__track::-webkit-scrollbar { display: none; }
+    .cert {
+      flex: 0 0 240px;
+      height: 180px;
+      scroll-snap-align: start;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(17, 17, 17, .06);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+    .cert:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(17, 17, 17, .1);
+    }
+    .cert img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 12px;
+    }
+    .tech-trust__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid #e5e5e5;
+      background: #fff;
+      color: var(--gray);
+      cursor: pointer;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, color .2s, border-color .2s, opacity .2s;
+    }
+    .tech-trust__nav svg { width: 14px; height: 14px; display: block; }
+    .tech-trust__nav:hover:not(:disabled) {
+      background: var(--orange);
+      color: #fff;
+      border-color: var(--orange);
+    }
+    .tech-trust__nav--prev { left: 0; }
+    .tech-trust__nav--next { right: 0; }
+    .tech-trust__nav:disabled { opacity: .35; cursor: not-allowed; }
+
+    /* ══════════════════════════════════════
+       Section 4 · MILESTONE · 關鍵里程碑
+       版型：白底置中，中央線橘色，年份左右錯開
+       ══════════════════════════════════════ */
+    .milestone {
+      padding: 120px 0;
+      background: var(--white);
+    }
+    .milestone__head {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .milestone__heading {
+      font-size: clamp(26px, 3.4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .milestone__heading em { font-style: normal; color: var(--color-heading); }
+    .milestone__sub {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+    .timeline {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    /* 中央線 */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--orange) 8%, var(--orange) 92%, transparent);
+      transform: translateX(-1px);
+    }
+    .tl-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 20px 0;
+    }
+    /* 圓點 */
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--orange);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 0 5px rgba(255, 101, 70, .18);
+      z-index: 2;
+    }
+    /* 年份 · H3 48px 特化 */
+    .tl-year {
+      font-size: clamp(32px, 3.6vw, 48px);
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .tl-body {
+      color: var(--gray);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .tl-body ul { list-style: none; padding: 0; }
+    .tl-body li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 10px;
+    }
+    .tl-body li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+    .tl-body li strong {
+      color: var(--color-heading);
+      font-weight: 700;
+    }
+    /* 左右對齊 */
+    .tl-item--right .tl-year { text-align: right; padding-right: 48px; }
+    .tl-item--right .tl-body { padding-left: 48px; }
+    .tl-item--left .tl-year { grid-column: 2; padding-left: 48px; }
+    .tl-item--left .tl-body { grid-column: 1; grid-row: 1; padding-right: 48px; text-align: right; }
+    .tl-item--left .tl-body li { padding-left: 0; padding-right: 18px; }
+    .tl-item--left .tl-body li::before { left: auto; right: 0; }
+
+    /* ══════════════════════════════════════
+       Section 5 · CTA BOTTOM (與 howwework 完全一致)
+       ══════════════════════════════════════ */
+    .cta-bottom {
+      background: var(--bg-light);
+      position: relative;
+      overflow: hidden;
+      padding: 96px 0;
+    }
+    .cta-bottom__bg {
+      position: absolute;
+      right: -3%;
+      top: 50%;
+      transform: translateY(-50%) rotate(-38deg);
+      width: 68%;
+      max-width: 900px;
+      opacity: .95;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cta-bottom .container { position: relative; z-index: 1; }
+    .cta-bottom__text { text-align: left; margin-left: -260px; }
+    .cta-bottom__heading {
+      font-size: clamp(26px, 3.4vw, 48px);
+      font-weight: 700;
+      color: var(--color-heading);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+    }
+
+    /* ══ FOOTER (完全複製自 howwework_0703) ══ */
+    .site-footer { background: #fff; border-top: 1px solid #c6d1dd; }
+
+    .footer__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      gap: 24px;
+    }
+    .footer__left { display: flex; flex-direction: column; gap: 24px; }
+    .footer__logo-onead img { display: block; width: 156px; height: 24px; }
+    .footer__copyright {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      color: #616e84;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .footer__right { display: flex; flex-direction: column; gap: 24px; align-items: flex-end; }
+    .footer__links-row { display: flex; align-items: center; gap: 24px; }
+    .footer__links-row a {
+      font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #3b3e40;
+      white-space: nowrap;
+    }
+    .footer__links-row a:hover { text-decoration: underline; }
+    .footer__logo-onedata img { display: block; width: 138px; height: 16px; }
+    .footer__social-row { display: flex; align-items: center; gap: 8px; }
+    .footer__follow-label {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      color: #616e84;
+      white-space: nowrap;
+      width: 70px;
+    }
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .social-icon--fb { background: #1877f2; border-radius: 64px; }
+    .social-icon--linkedin { background: #006699; border-radius: 4px; }
+    .social-icon--line { background: #3ace01; border-radius: 4px; }
+    .social-icon img { display: block; position: absolute; object-fit: contain; }
+    .social-icon--fb img { top: 19.53%; left: 29.49%; width: 43%; height: 80.47%; }
+    .social-icon--linkedin img { top: 25%; left: 25%; width: 50%; height: 48.84%; }
+    .social-icon--line img { top: 20.83%; left: 16.67%; width: 66.66%; height: 62.45%; }
+
+    /* ══ RWD ══ */
+    @media (max-width: 1024px) {
+      .container { padding: 0 32px; }
+      .navbar-outer { padding: 12px 16px; }
+
+      .hero-about__content { margin-left: 0; }
+      .hero-about__circle {
+        top: -50vw;
+        left: -30vw;
+        width: 130vw;
+        height: 130vw;
+      }
+
+      /* Tablet · 保持 4/5/5，只是 gap 縮小 */
+      .leadership__photos { gap: 8px; }
+      .leadership__expand__inner { padding: 28px 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .navbar-outer { padding: 10px 12px; }
+      .navbar { padding: 0 18px; position: relative; border-radius: 40px; }
+      .navbar__hamburger { display: flex; }
+      .navbar__links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0; right: 0;
+        background: rgba(255, 255, 255, 0.95);
+        -webkit-backdrop-filter: blur(15px);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        border-radius: 12px;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+      }
+      .navbar__links.open { display: flex; }
+      .navbar__links a { padding: 12px 20px; font-size: 15px; }
+
+      .hero-about, .leadership, .tech-trust, .milestone, .cta-bottom { padding: 56px 0; min-height: auto; }
+
+      /* RWD Mobile 字級規範 · H1=32px / H2=26px / H3=22px */
+      .hero-about__heading { font-size: 32px; }
+      .leadership__heading,
+      .tech-trust__heading,
+      .milestone__heading,
+      .cta-bottom__heading { font-size: 26px; }
+      .tl-year { font-size: 24px; }
+
+      /* Mobile · 拆成 2 欄 (三個 row 都用 2 欄) */
+      .leadership__row--r1 .leadership__photos,
+      .leadership__row--r2 .leadership__photos,
+      .leadership__row--r3 .leadership__photos {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .leader-card__quote-text { font-size: 15px; }
+      .leader-card__quote-hint { display: none; }
+      /* 展開面板 mobile · 卡片全寬(第一列) + 面板全寬(第二列)，其他卡片仍隱藏 */
+      .leadership__row.is-open .leader-card.is-active {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        max-width: 260px;
+        justify-self: start;
+      }
+      .leadership__row.is-open .leadership__expand {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        height: auto !important;
+        border-radius: 0 0 2px 2px;
+      }
+      .leadership__expand__inner {
+        padding: 24px 20px;
+        overflow-y: visible;
+      }
+      .bio-panel__close { bottom: 12px; right: 12px; }
+
+      /* Mobile Timeline · 全部靠左 */
+      .timeline::before { left: 12px; }
+      .tl-item::before { left: 12px; top: 36px; }
+      .tl-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-left: 40px;
+      }
+      .tl-item--right .tl-year,
+      .tl-item--left .tl-year {
+        text-align: left;
+        padding: 0;
+        grid-column: 1;
+      }
+      .tl-item--left .tl-body,
+      .tl-item--right .tl-body {
+        text-align: left;
+        padding: 0;
+        grid-column: 1;
+        grid-row: auto;
+      }
+      .tl-item--left .tl-body li {
+        padding-left: 18px;
+        padding-right: 0;
+      }
+      .tl-item--left .tl-body li::before {
+        left: 0;
+        right: auto;
+      }
+
+      .cta-bottom__bg {
+        width: 140%;
+        right: -40%;
+        top: 65%;
+        opacity: .5;
+      }
+      .cta-bottom__text { margin-left: 0; }
+
+      .footer__inner { flex-direction: column; align-items: flex-start; padding: 32px 0; }
+      .footer__right { align-items: flex-start; width: 100%; }
+      .footer__links-row { flex-wrap: wrap; gap: 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .leadership__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <header class="navbar-outer">
+    <nav class="navbar" id="navbar">
+      <a href="#" class="navbar__logo">
+        <img src="images/logo.svg" alt="ONEAD" height="20">
+      </a>
+      <button class="navbar__hamburger" id="hamburger" aria-label="選單">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="navbar__links" id="navLinks">
+        <li><a href="#">產品與解方</a></li>
+        <li><a href="#">精彩案例</a></li>
+        <li><a href="#">成為合作夥伴</a></li>
+        <li><a href="#">知識與媒體中心</a></li>
+        <li><a href="#" class="active">關於 OneAD</a></li>
+        <li><a href="#">聯繫我們</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ══ Section 1 · HERO · About OneAD ══ -->
+  <section class="hero-about">
+    <div class="container">
+      <div class="hero-about__content">
+        <!-- H1 · 56px / 800 / 1.15 / -0.03em -->
+        <h1 class="hero-about__heading">ABOUT <span>OneAD</span><small>關於我們</small></h1>
+        <!-- P · 16px / 400 / 1.75 -->
+        <p class="hero-about__body">
+          OneAD 是一間以 AI 為核心的 AdTech 公司，致力於打造品牌行銷的落地實現。以整合虛實媒體聯播網、超過 400 個曝光管道、涵蓋數千萬品牌會員資源與多元零售通路數據，持續搭起 AdTech 與 MarTech 之間的應用橋樑，協助品牌在多元媒體與新生代中和取新流量下曝光，成為行銷夥伴的行銷夥伴。
+        </p>
+        <a href="#" class="btn btn-primary">加入 OneAD</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Section 2 · LEADERSHIP ══ -->
+  <section class="leadership">
+    <div class="container">
+      <div class="leadership__head">
+        <h2 class="leadership__heading">
+          OneAD<br><em>LEADERSHIP</em><span class="zh">管理團隊</span>
+        </h2>
+      </div>
+
+      <div class="leadership__rows">
+
+        <!-- ═══ Row 1 · 4 位 ═══ -->
+        <div class="leadership__row leadership__row--r1">
+          <div class="leadership__photos">
+            <button class="leader-card" data-id="hilo" aria-label="陳宏守 Hilo">
+              <img src="images/aboutonead_pic/6882011-20260326 26-054 09 A  Hilo NP5054M.jpg" alt="陳宏守 Hilo">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">陳宏守<em>Hilo</em></div>
+                <div class="leader-card__title">董事長暨共同創辦人</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">翻轉認知，建構傳播新標竿</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="joyce" aria-label="李素真 Joyce">
+              <img src="images/aboutonead_pic/20260326 26-054 08 A Joyce DL4968M.jpg" alt="李素真 Joyce">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">李素真<em>Joyce</em></div>
+                <div class="leader-card__title">執行長暨共同創辦人</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">參與時代，洞見未來</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="andy" aria-label="葉毓輝 Andy">
+              <img src="images/aboutonead_pic/0987504-20260326 26-054 06 A Andy NL4741L.jpg" alt="葉毓輝 Andy">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">葉毓輝<em>Andy</em></div>
+                <div class="leader-card__title">總經理</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">解構技術，定義商業新實效</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="yian" aria-label="林珆安 Yian">
+              <img src="images/aboutonead_pic/7220437-20260326 26-054 05 A Yian NL4700 1L.jpg" alt="林珆安 Yian">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">林珆安<em>Yian</em></div>
+                <div class="leader-card__title">業務總經理</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">以誠信實踐共好</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <div class="leadership__expand" data-row="r1">
+              <div class="leadership__expand__inner"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Row 2 · 5 位 ═══ -->
+        <div class="leadership__row leadership__row--r2">
+          <div class="leadership__photos">
+            <button class="leader-card" data-id="donna" aria-label="管偉筠 Donna">
+              <img src="images/aboutonead_pic/0926650-20260327 26-054 12 A Donna SR5706M.jpg" alt="管偉筠 Donna">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">管偉筠<em>Donna</em></div>
+                <div class="leader-card__title">媒體產品管理總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">智能產品 追求極致</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="jed" aria-label="林雨諄 Jed">
+              <img src="images/aboutonead_pic/5854485-20260327 26-054 10 A Jed SR5502 1M.jpg" alt="林雨諄 Jed">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">林雨諄<em>Jed</em></div>
+                <div class="leader-card__title">數據商務管理總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">化繁為簡，創造實效</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="emma" aria-label="王之岑 Emma">
+              <img src="images/aboutonead_pic/1171957-20260323 26-054 01 A Emma IR3782M.jpg" alt="王之岑 Emma">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">王之岑<em>Emma</em></div>
+                <div class="leader-card__title">夥伴聯合暨發展總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">與夥伴並進，共創未來</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="jimmy" aria-label="郭景揚 Jimmy">
+              <img src="images/aboutonead_pic/6698754-20260323 26-054 02 A Jimmy IL3809Ｍ.jpg" alt="郭景揚 Jimmy">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">郭景揚<em>Jimmy</em></div>
+                <div class="leader-card__title">資深技術總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">技術落地，創造價值</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="sam" aria-label="張碩吟 Sam">
+              <img src="images/aboutonead_pic/8420471-20260330 26-054 13 A Sam SL6696 1M.jpg" alt="張碩吟 Sam">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">張碩吟<em>Sam</em></div>
+                <div class="leader-card__title">軟體開發總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">AI 賦能，共創頂峰</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <div class="leadership__expand" data-row="r2">
+              <div class="leadership__expand__inner"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ Row 3 · 4 位 + CTA ═══ -->
+        <div class="leadership__row leadership__row--r3">
+          <div class="leadership__photos">
+            <button class="leader-card" data-id="penny" aria-label="黃雯婷 Penny">
+              <img src="images/aboutonead_pic/6167691-20260323 26-054 04 A Penny NL4034 1L.jpg" alt="黃雯婷 Penny">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">黃雯婷<em>Penny</em></div>
+                <div class="leader-card__title">廣告卓效優化總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">敏捷執行，優化卓越</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="sean" aria-label="潘思翰 Sean">
+              <img src="images/aboutonead_pic/0097587-20260327 26-054 11 A Sean SL5583M.jpg" alt="潘思翰 Sean">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">潘思翰<em>Sean</em></div>
+                <div class="leader-card__title">資深業務總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">效能掛帥，智取成功</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="elisa" aria-label="林鈺樺 Elisa">
+              <img src="images/aboutonead_pic/6062143-20260326 26-054 07 A Elisa NL4841L.jpg" alt="林鈺樺 Elisa">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">林鈺樺<em>Elisa</em></div>
+                <div class="leader-card__title">資深業務總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">策略領航，創意落地</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <button class="leader-card" data-id="irene" aria-label="張紫純 Irene">
+              <img src="images/aboutonead_pic/3461084-20260323 26-054 03 A Irene NR3908 1M.jpg" alt="張紫純 Irene">
+              <div class="leader-card__caption">
+                <div class="leader-card__name">張紫純<em>Irene</em></div>
+                <div class="leader-card__title">人資暨運營服務總監</div>
+              </div>
+              <div class="leader-card__quote">
+                <span class="leader-card__quote-text">精實運作，賦能未來</span>
+                <span class="leader-card__quote-hint">CLICK TO READ MORE</span>
+              </div>
+            </button>
+            <a href="#" class="leader-card leader-card--cta" aria-label="加入 OneAD">
+              <img src="images/aboutonead_pic/join-us.png" alt="Join us · 加入 OneAD">
+            </a>
+            <div class="leadership__expand" data-row="r3">
+              <div class="leadership__expand__inner"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Section 3 · TECH & TRUST ══ -->
+  <section class="tech-trust">
+    <div class="container tech-trust__inner">
+      <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+      <h2 class="tech-trust__heading">
+        以<em>技術</em>驅動突破，以<em>成果</em>累積信賴
+      </h2>
+
+      <div class="tech-trust__carousel">
+        <div class="tech-trust__viewport">
+          <div class="tech-trust__track">
+            <div class="cert"><img src="images/aboutonead_pic/cert-01-cio-2025.png" alt="CIO Outlook 2025"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-02-silicon-2021.jpeg" alt="The Silicon Review 50 Innovative Companies to Watch 2021"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-03-cio-2021.jpeg" alt="APAC CIO Outlook Top 10 Big Data Solution Providers 2021"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-04-cio-2019.jpg" alt="APAC CIO Outlook Top 10 Big Data Solution Providers 2019"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-05-cio-2018.jpeg" alt="APAC CIO Outlook Top 10 Big Data Solution Providers 2018"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-06-analytics-2019.jpeg" alt="Analytics Insight The 10 Most Innovative Companies in Machine Learning 2019"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-07-productkey-patent.jpg" alt="OneAD ProductKey® 專利證書"></div>
+            <div class="cert"><img src="images/aboutonead_pic/cert-08-koni-patent.jpg" alt="OneAD Koni 專利證書"></div>
+          </div>
+        </div>
+        <button type="button" class="tech-trust__nav tech-trust__nav--prev" aria-label="上一張">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="tech-trust__nav tech-trust__nav--next" aria-label="下一張">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Section 4 · MILESTONE · 關鍵里程碑 ══ -->
+  <section class="milestone">
+    <div class="container">
+      <div class="milestone__head">
+        <h2 class="milestone__heading">關鍵<em>里程碑</em></h2>
+        <p class="milestone__sub">從 2010 到 2025，我們持續以技術與創新，寫下台灣廣告科技的每一個關鍵時刻。</p>
+      </div>
+
+      <div class="timeline">
+        <!-- 2025 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2025</div>
+          <div class="tl-body">
+            <ul>
+              <li>榮獲美國矽谷科技期刊 APAC CIO Outlook 評選為亞太區「<strong>最佳行銷科技解決方案</strong>」</li>
+              <li>業界首家取得「<strong>特色商圈</strong>」技術專利，運用發票數據結合 LBS 定位，實現從單點通路到全商圈的精準區域鎖定</li>
+              <li>發布全台首創 Agentic AI 平台「<strong>SuperDSP</strong>」,引領數位廣告邁入全自動化智能新紀元</li>
+              <li>發表「<strong>情感連結科學（EBS）</strong>」,首創 EBU 指標讓品牌情感可精準量化</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2024 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2024</div>
+          <div class="tl-body">
+            <ul>
+              <li>與 <strong>Taboola</strong> 達成策略聯盟，共建台灣最大原生廣告生態系統</li>
+              <li>推出業界最完整 Cookieless 數據解方「<strong>ProductKey 2.0 — AI 進化版</strong>」:運用海量媒體第一方數據，以演算激活品牌第一方數據應用</li>
+              <li>推出市場首創多通路零售數據智能平台（Retail DMP）「<strong>Webb 韋伯</strong>」</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2023 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2023</div>
+          <div class="tl-body">
+            <ul>
+              <li>領先全台推出「<strong>注意力衝擊指標</strong>」（Attention Impact Index）:在注意力經濟時代科學量化廣告衝擊，評估廣告溝通成效</li>
+              <li>領先業界發布「<strong>注意力衝擊白皮書</strong>」:提出注意力衝擊指標並以科學化量測為貨幣計價，宣告注意力經濟時代來臨</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2022 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2022</div>
+          <div class="tl-body">
+            <ul>
+              <li>首創「<strong>ProductKey 1.0</strong>」信號定向解決方案，全面迎戰 Cookieless 時代</li>
+              <li>提出新廣告型態「<strong>高參與度廣告</strong>」（Brand Engagement Advertising），呼應消費者數位閱讀習慣與演進行為的變革</li>
+              <li>與 <strong>Wootag</strong> 合作，InStream 非串流內影音廣告正式進入高參與度廣告領域</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2021 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2021</div>
+          <div class="tl-body">
+            <ul>
+              <li>成為 <strong>Lotame</strong> 的台灣數據合作夥伴</li>
+              <li>獲選 <strong>The Silicon Review</strong>「2021 值得關注的五十家創新公司」</li>
+              <li>三度霸榜 <strong>The APAC CIO Outlook</strong> 2021 年「亞太區十大數據解決方案提供者」</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2020 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2020</div>
+          <div class="tl-body">
+            <ul>
+              <li>與 <strong>Verizon</strong> 締結數據合作夥伴關係，數據實力再獲國際級認證</li>
+              <li>發表 <strong>Consumer Intent、Intent Data、Seed lookalike</strong> 新廣告科技技術</li>
+              <li>執行長 Joyce 獲選 <strong>The Silicon Review</strong> 2020 年「30 大最受矚目領導人」</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2019 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2019</div>
+          <div class="tl-body">
+            <ul>
+              <li>數據力獲國際肯定,成為 <strong>The Trade Desk（TTD）</strong>台灣首位數據合作夥伴、成為 <strong>Nielsen</strong> 的台灣優先數據合作夥伴</li>
+              <li>獲 <strong>Analytics Insight</strong> 編輯群選為「2019 十大機器學習創新企業」</li>
+              <li>連續兩年榮獲 <strong>The APAC CIO Outlook</strong>「2019 年亞太區十大數據解決方案提供者」,獲選為封面故事</li>
+              <li>全台首創 <strong>InStream 串流內影音廣告跨網受眾定向</strong>解決方案</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2018 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2018</div>
+          <div class="tl-body">
+            <ul>
+              <li>獲 <strong>APAC CIO Outlook</strong> 評選亞太區年度 <strong>Top 10 大數據解決方案提供者</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2017 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2017</div>
+          <div class="tl-body">
+            <ul>
+              <li>稱霸台灣行動覆蓋率，達 <strong>99.6%</strong>（comScore MMX）</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2016 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2016</div>
+          <div class="tl-body">
+            <ul>
+              <li>推出台灣首個影音廣告程序化購買平台「<strong>OneAD SPEED</strong>」,引領市場進入受眾購買新紀元</li>
+              <li>首創互動展演的文中影音 + Banner 串流外廣告格式「<strong>變形金剛（MIR Transformer）</strong>」,為 OutStream 串流外影音廣告市占第一</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2015 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2015</div>
+          <div class="tl-body">
+            <ul>
+              <li>月可觸及不重複訪客突破 <strong>951 萬</strong>,拉大與 YouTube 的距離（788 萬）,持續坐穩台灣第一大影音廣告聯播媒體</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2014 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2014</div>
+          <div class="tl-body">
+            <ul>
+              <li>通過經濟部 <strong>SBIR「中小企業創新研發計畫」</strong>,53 項中列名最具代表性首位。針對廣告聯播平台的購前規劃和廣告成效分析系統提供決策工具</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2013 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2013</div>
+          <div class="tl-body">
+            <ul>
+              <li>首創 <strong>OneAD ERP（眼球收視率）</strong>,建立電視與數位廣告的雙軌衡量標準</li>
+              <li>成為台灣第一大影音廣告聯播平台，桌機月觸及 <strong>865 萬 UU</strong>（Comscore MMX）</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2012 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2012</div>
+          <div class="tl-body">
+            <ul>
+              <li>開創台灣 <strong>OutStream 串流外影音廣告</strong>先河，專利大版位 <strong>In-Page</strong> 格式上市</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2011 (右) -->
+        <div class="tl-item tl-item--right">
+          <div class="tl-year">2011</div>
+          <div class="tl-body">
+            <ul>
+              <li>推出創新的 OneAD「<strong>影音內容前置插入式影音廣告</strong>」（In-stream Pre-roll Video Ad）,獲蘋果日報動新聞率先合作採用</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 2010 (左) -->
+        <div class="tl-item tl-item--left">
+          <div class="tl-year">2010</div>
+          <div class="tl-body">
+            <ul>
+              <li><strong>果實夥伴公司成立</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ Section 5 · CTA BOTTOM ══ -->
+  <section class="cta-bottom">
+    <img class="cta-bottom__bg" src="images/Contact_0702.png" alt="">
+    <div class="container">
+      <div class="cta-bottom__text">
+        <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
+        <h2 class="cta-bottom__heading">與 OneAD 展開<br>下一步合作</h2>
+        <a href="#" class="btn btn-primary">立即聯絡我們</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER (與 howwework_0703.html 完全一致) ══ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__left">
+          <div class="footer__logo-onead">
+            <img src="images/footer-logo.svg" alt="ONEAD">
+          </div>
+          <p class="footer__copyright">Copyright©OneAD.All rights reserved.</p>
+        </div>
+        <div class="footer__right">
+          <div class="footer__links-row">
+            <a href="#">訂閱電子報</a>
+            <a href="#">隱私權聲明</a>
+            <a href="#">防詐騙聲明</a>
+            <div class="footer__logo-onedata">
+              <img src="images/onedata.svg" alt="ONEDATA">
+            </div>
+          </div>
+          <div class="footer__social-row">
+            <span class="footer__follow-label">Follow Us :</span>
+            <a href="#" class="social-icon social-icon--fb" aria-label="Facebook">
+              <img src="images/fb.svg" alt="FB">
+            </a>
+            <a href="#" class="social-icon social-icon--linkedin" aria-label="LinkedIn">
+              <img src="images/in.svg" alt="LinkedIn">
+            </a>
+            <a href="#" class="social-icon social-icon--line" aria-label="LINE">
+              <img src="images/line.svg" alt="LINE">
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ═══ Hamburger nav ═══ */
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    document.querySelectorAll('.navbar__links a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    /* ═══ Leadership · 卡片動態 (Hover 一句話 · Click 展開整列簡歷) ═══
+       資料來源：管理團隊個人簡介.xlsx (Overall Sheet) */
+    const BIOS = {
+      hilo: {
+        name: '陳宏守', en: 'Hilo Chen', title: '董事長暨共同創辦人',
+        quote: '翻轉認知，建構傳播新標竿',
+        photo: 'images/aboutonead_pic/6882011-20260326 26-054 09 A  Hilo NP5054M.jpg',
+        intro: [
+          '「AI 時代的變革，不是技術的更迭，而是領導與認知的革命。」',
+          '憑藉深厚的產業淬鍊與跨界思維，在科技浪潮中為公司校準航向。深信公司的價值在於完美連結夥伴與科技，扮演整合應用專家，在引領團隊成為傳播科技建構者的同時，始終秉持「利他」初衷，在朝向產業標竿的道路上，與合作夥伴共好、共同成長。'
+        ],
+        experience: [
+          '精誠 (精業) 執行長暨總經理',
+          '雅虎中國總經理暨北亞區營銷副總裁',
+          '中化控股 獨立董事',
+          '瓦城泰統 獨立董事',
+          '中磊電子 獨立董事',
+          '中華民國資訊軟體公會理事'
+        ]
+      },
+      joyce: {
+        name: '李素真', en: 'Joyce Lee', title: '執行長暨共同創辦人',
+        quote: '參與時代，洞見未來',
+        photo: 'images/aboutonead_pic/20260326 26-054 08 A Joyce DL4968M.jpg',
+        intro: [
+          '熱愛工作、運動；致力於生命學習與服事。',
+          '從事科技與行銷產業多年，親身參與各項重大科技變革；從電腦革命、網際網路、行動、影音新媒體創新等重要里程碑。對於科技創新與行銷策略整合運用有獨到的洞見。'
+        ],
+        experience: [
+          '美商 BBDO 黃禾廣告股份有限公司 執行長',
+          '美商 Hill & Knowlton 偉達公關顧問公司 董事總經理',
+          '哈佛企管顧問公司 總經理',
+          'IBM 台灣分公司 企劃執行',
+          '李長榮化工 獨立董事',
+          '關鍵評論網 董事',
+          '財團法人富邦人壽美術館基金會 董事',
+          '自行車新文化基金會 董事',
+          '全球人壽 獨立董事'
+        ],
+        awards: [
+          '美國知名雜誌 The Silicon Review「2020 年 30 大最受矚目領導人」',
+          '入圍 Campaign’s Woman Leading Change Awards (WLCA)「年度 CEO 獎」'
+        ]
+      },
+      andy: {
+        name: '葉毓輝', en: 'Andy Yeh', title: '總經理',
+        quote: '解構技術，定義商業新實效',
+        photo: 'images/aboutonead_pic/0987504-20260326 26-054 06 A Andy NL4741L.jpg',
+        intro: [
+          '作為廣告科技產業的先驅者，曾帶領團隊開創台灣串流影音廣告先河。憑藉這份熱愛創新與極致理性的特質，將深奧的數據智能提煉為具備高度競爭力的決策體系。深信技術的終極價值應落實於真實的增長，引領團隊以科學的嚴謹與熱忱，為品牌夥伴實踐超越期待的商業實效。'
+        ],
+        experience: [
+          '精誠 (精業) 副總經理暨子公司總經理',
+          'Sun Microsystems 解決方案業務協理',
+          'Novell 經銷協理',
+          'Syntest EDA 研發副理'
+        ]
+      },
+      yian: {
+        name: '林珆安', en: 'Yian Lin', title: '業務總經理',
+        quote: '以誠信實踐共好',
+        photo: 'images/aboutonead_pic/7220437-20260326 26-054 05 A Yian NL4700 1L.jpg',
+        intro: [
+          '深耕廣告科技領域多年，親身參與了市場的拓荒與變革。因為懂品牌的痛，更懂前線的戰況，擅長在技術與市場之間建立戰略連結，讓科技落地為具備實效的數位傳播佈局。',
+          '深信業績目標與工作進度都是可預估、可量化的科學。透過數據驅動的業務管理體系，引領團隊在「誠信正直」的根基上各展所長，享受站在客戶立場問出關鍵需求、合力創造成果的那份成就感。'
+        ],
+        experience: [
+          '恆隆行貿易股份有限公司 ─ dyson 事業處，行銷企劃主任',
+          '肯夢國際股份有限公司 ─ 新事業開發'
+        ]
+      },
+      donna: {
+        name: '管偉筠', en: 'Donna Kuan', title: '媒體產品管理總監',
+        quote: '智能產品 追求極致',
+        photo: 'images/aboutonead_pic/0926650-20260327 26-054 12 A Donna SR5706M.jpg',
+        intro: [
+          'PLANNING = PLAYING。樂於探索、發現、分析、決策、付諸行動，享受從 0 到 1 實現目標的過程。從廣告代理商到數位媒體科技開發者，致力協助品牌友善且有效地與消費者溝通，建立真實的信賴關係並創造商業價值。'
+        ],
+        experience: [
+          '凱絡媒體 資深企劃總監',
+          '星傳媒體 企劃副總監',
+          'PChome 產品企劃'
+        ]
+      },
+      jed: {
+        name: '林雨諄', en: 'Jed Lin', title: '數據商務管理總監',
+        quote: '化繁為簡，創造實效',
+        photo: 'images/aboutonead_pic/5854485-20260327 26-054 10 A Jed SR5502 1M.jpg',
+        intro: [
+          '享受在複雜中找到清晰的那一刻。',
+          '從國際廣告代理商、數位媒體、MarTech，再到 AdTech 第一線，跨越了行銷產業的關鍵轉型節點。擅長在技術與市場之間搭橋，將複雜的產品邏輯轉化為商業價值。',
+          '相信數據是決策的底氣，AI 是放大價值的槓桿，讓商業在新科技革命中真正向前。'
+        ],
+        experience: [
+          '愛酷智能科技 商業市場策略處 總監',
+          'Yahoo 奇摩 業務策略企劃 資深總監',
+          '美商 BBDO 黃禾廣告 客戶服務 總監'
+        ]
+      },
+      emma: {
+        name: '王之岑', en: 'Emma Wang', title: '夥伴聯合暨發展總監',
+        quote: '與夥伴並進，共創未來',
+        photo: 'images/aboutonead_pic/1171957-20260323 26-054 01 A Emma IR3782M.jpg',
+        intro: [
+          '擅長於穩定中尋求突破，這不僅是我習慣的工作方式，更是與所有夥伴攜手並進的宗旨。擁有 4A 媒體代理商的紮實歷練，曾服務各領域知名品牌。現任媒體與夥伴開發主管，將過去的全媒體思維注入每一次的合作中，整合跨界資源並發揮多方加乘效應，讓視野與接觸面向持續突破。'
+        ],
+        experience: [
+          '星傳媒體 (Starcom) 媒體企劃經理',
+          '凱絡媒體 (Carat) 媒體企劃副理'
+        ]
+      },
+      jimmy: {
+        name: '郭景揚', en: 'Jimmy Kuo', title: '資深技術總監',
+        quote: '技術落地，創造價值',
+        photo: 'images/aboutonead_pic/6698754-20260323 26-054 02 A Jimmy IL3809Ｍ.jpg',
+        intro: [
+          '長期投入廣告科技、後端系統與數據產品研發，擅長以工程思維拆解複雜問題，並將 AI 技術導入實際業務流程。重視系統穩定、資料準確與商業成效，持續在技術與市場需求之間建立可執行、可驗證、可成長的解決方案。'
+        ],
+        experience: [
+          '精誠資訊 軟體專案主管',
+          '康特系統 嵌入式軟體工程師',
+          '正崴精密 PDM 工程師'
+        ]
+      },
+      sam: {
+        name: '張碩吟', en: 'Sam Chang', title: '軟體開發總監',
+        quote: 'AI 賦能，共創頂峰',
+        photo: 'images/aboutonead_pic/8420471-20260330 26-054 13 A Sam SL6696 1M.jpg',
+        intro: [
+          '擅長在穩定中尋求技術突破。憑藉多年軟體研發的紮實歷練，將嚴謹的工程思維注入數位廣告。用代碼解構複雜市場，整合跨界資源，與所有夥伴在程式與行銷的交界處持續開拓。'
+        ],
+        experience: [
+          '樂陞科技 遊戲軟體開發工程師'
+        ]
+      },
+      penny: {
+        name: '黃雯婷', en: 'Penny Huang', title: '廣告卓效優化總監',
+        quote: '敏捷執行，優化卓越',
+        photo: 'images/aboutonead_pic/6167691-20260323 26-054 04 A Penny NL4034 1L.jpg',
+        intro: [
+          '服務超過 10 年的操作優化經驗，在數位環境裡一直求新求變的數位世界裡，保持勇於學習且迎接挑戰是重要的關鍵。身為公司的活動執行者，「跨部門溝通」與「解決疑難雜症」是我的日常，具備「速度」與「彈性」是最強大的本能。'
+        ],
+        experience: [
+          '可樂旅遊 行銷企劃'
+        ]
+      },
+      sean: {
+        name: '潘思翰', en: 'Sean Pan', title: '資深業務總監',
+        quote: '效能掛帥，智取成功',
+        photo: 'images/aboutonead_pic/0097587-20260327 26-054 11 A Sean SL5583M.jpg',
+        intro: [
+          '身在廣告媒體產業，每天都能夠接受最新最即時的行銷科技與市場資訊是我最熱愛的一件事。',
+          '10 餘年來服務過超過 500 個品牌、千檔廣告都是經驗的滋養，擁抱創新、保持學習方能與客戶攜手打下美麗的勝仗！'
+        ],
+        experience: [
+          '艾迪英特 Ad2iction 業務部 業務經理',
+          '聯利媒體 TVBS 融媒體行銷事業部 執行專員'
+        ]
+      },
+      elisa: {
+        name: '林鈺樺', en: 'Elisa Lin', title: '資深業務總監',
+        quote: '策略領航，創意落地',
+        photo: 'images/aboutonead_pic/6062143-20260326 26-054 07 A Elisa NL4841L.jpg',
+        intro: [
+          '具備多年品牌行銷與媒體整合經驗，習慣從市場趨勢與客戶需求出發，結合精準策略、數據洞察與創意呈現，幫助品牌找到最適合的溝通方式，讓好的內容真正被看見。'
+        ],
+        experience: [
+          '實力媒體 資深業務經理'
+        ]
+      },
+      irene: {
+        name: '張紫純', en: 'Irene Chang', title: '人資暨運營服務總監',
+        quote: '精實運作，賦能未來',
+        photo: 'images/aboutonead_pic/3461084-20260323 26-054 03 A Irene NR3908 1M.jpg',
+        intro: [
+          '喜歡探究人性並熱衷與人連結，具備嚴謹穩健與包容理解的特質。帶著逾 15 年大傳產業人資經歷，我致力於發展人才以賦能未來，順暢流程以精實運作，提供高效可靠的環境及成長發亮的舞台，讓全員致力於創造價值。'
+        ],
+        experience: [
+          '李奧貝納廣告 人資經理',
+          '安吉斯媒體集團 人才發展副理',
+          '利豐 人力資源副理'
+        ]
+      }
+    };
+
+    function renderBio(id) {
+      const b = BIOS[id];
+      if (!b) return '';
+      const introHTML = b.intro.map(p => `<p>${p}</p>`).join('');
+      const expHTML = b.experience && b.experience.length
+        ? `<h4>經歷</h4><ul>${b.experience.map(e => `<li>${e}</li>`).join('')}</ul>` : '';
+      const awardHTML = b.awards && b.awards.length
+        ? `<h4>獲獎事蹟</h4><ul>${b.awards.map(e => `<li>${e}</li>`).join('')}</ul>` : '';
+      return `
+        <button type="button" class="bio-panel__close" aria-label="關閉">&times;</button>
+        <div class="bio-panel__body">${introHTML}${expHTML}${awardHTML}</div>
+      `;
+    }
+
+    // 讓灰色面板與 active 卡片同高，超出時內部捲動 (僅桌機)
+    function syncPanelHeight(row) {
+      const active = row.querySelector('.leader-card.is-active');
+      const panel = row.querySelector('.leadership__expand');
+      if (!active || !panel) return;
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        panel.style.height = '';
+        return;
+      }
+      panel.style.height = active.getBoundingClientRect().height + 'px';
+    }
+
+    // FLIP 動畫：套用新 class 前記位置、套用後量新位置、用 transform 從舊滑到新
+    function flipCard(card, applyChange) {
+      const oldRect = card.getBoundingClientRect();
+      applyChange();
+      const newRect = card.getBoundingClientRect();
+      const dx = oldRect.left - newRect.left;
+      const dy = oldRect.top - newRect.top;
+      if (Math.abs(dx) < 4 && Math.abs(dy) < 4) return;
+      card.animate(
+        [
+          { transform: `translate(${dx}px, ${dy}px)` },
+          { transform: 'translate(0, 0)' }
+        ],
+        { duration: 480, easing: 'cubic-bezier(.22, 1, .36, 1)', composite: 'replace' }
+      );
+    }
+
+    function closeRow(row) {
+      const active = row.querySelector('.leader-card.is-active');
+      const panel = row.querySelector('.leadership__expand');
+      const finalize = () => {
+        row.classList.remove('is-open');
+        if (active) active.classList.remove('is-active');
+      };
+      if (active) {
+        flipCard(active, finalize);
+      } else {
+        finalize();
+      }
+      if (panel) {
+        panel.dataset.activeId = '';
+        panel.style.height = '';
+      }
+    }
+
+    document.querySelectorAll('.leader-card[data-id]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = card.dataset.id;
+        const row = card.closest('.leadership__row');
+        const panel = row.querySelector('.leadership__expand');
+        const currentId = panel.dataset.activeId || '';
+
+        // 若點同一位 → 收合
+        if (currentId === id) {
+          closeRow(row);
+          return;
+        }
+
+        // 關掉其他 row
+        document.querySelectorAll('.leadership__row').forEach(r => {
+          if (r !== row) closeRow(r);
+        });
+
+        // 展開這位 (FLIP：卡片從原位置滑到 col 1)
+        panel.querySelector('.leadership__expand__inner').innerHTML = renderBio(id);
+        panel.dataset.activeId = id;
+        flipCard(card, () => {
+          row.classList.add('is-open');
+          row.querySelectorAll('.leader-card.is-active').forEach(c => c.classList.remove('is-active'));
+          card.classList.add('is-active');
+        });
+
+        // 關閉鈕 (新內容 → 每次重新綁)
+        const closeBtn = panel.querySelector('.bio-panel__close');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', (ev) => {
+            ev.stopPropagation();
+            closeRow(row);
+          });
+        }
+
+        // 面板高度與卡片同步
+        requestAnimationFrame(() => syncPanelHeight(row));
+
+        // 滑到卡片位置 (卡片與面板現在皆位於同一列/同一區塊，滑到卡片即可帶到視野中央)
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+      });
+    });
+
+    // 視窗尺寸變化 → 重新同步高度
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        document.querySelectorAll('.leadership__row.is-open').forEach(r => syncPanelHeight(r));
+      }, 120);
+    });
+
+    /* ══ Tech-trust · 證書 Carousel · 左右鍵 + 邊界禁用 ══ */
+    (function () {
+      const track = document.querySelector('.tech-trust__track');
+      const prev  = document.querySelector('.tech-trust__nav--prev');
+      const next  = document.querySelector('.tech-trust__nav--next');
+      if (!track || !prev || !next) return;
+
+      const step = 240 + 24; // slide + gap
+      const updateNav = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        prev.disabled = track.scrollLeft <= 0;
+        next.disabled = track.scrollLeft >= max - 1;
+      };
+
+      prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
+      next.addEventListener('click', () => track.scrollBy({ left:  step, behavior: 'smooth' }));
+      track.addEventListener('scroll', updateNav, { passive: true });
+      window.addEventListener('resize', updateNav);
+      // 圖片載入後高度會改變 → 再同步一次
+      window.addEventListener('load', updateNav);
+      updateNav();
+    })();
+  </script>
+
+</body>
+
+</html>

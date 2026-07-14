@@ -452,46 +452,33 @@
       justify-content: center;
     }
 
-    /* ══ CTA BOTTOM (羅小姐的堅持 · 裝置圖當背景、非常大、傾斜、被切到) ══ */
+    /* ══ CTA BOTTOM (與 about_0708 統一版本) ══ */
     .cta-bottom {
-      padding: 96px 0;
-      background: #f5f4f2;
-      overflow: hidden;
+      background: var(--bg-light);
       position: relative;
+      overflow: hidden;
+      padding: 96px 0;
     }
-
-    /* 裝置合成圖 · 絕對定位當背景層，稍微傾斜、右側略切 */
     .cta-bottom__bg {
       position: absolute;
-      width: 75%;
-      max-width: none;
-      height: auto;
-      top: 60%;
-      right: -10%;
-      transform: translateY(-60%) rotate(-8deg);
-      z-index: 0;
+      right: -3%;
+      top: 50%;
+      transform: translateY(-50%) rotate(-38deg);
+      width: 68%;
+      max-width: 900px;
+      opacity: .95;
       pointer-events: none;
-      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.15));
+      z-index: 0;
     }
-
-    .cta-bottom .container {
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-bottom__text {
-      max-width: 700px;
-      transform: translate(-250px, -100px);
-    }
-
-    /* H2 · 48px / 700 / 1.25 / -0.01em */
+    .cta-bottom .container { position: relative; z-index: 1; }
+    .cta-bottom__text { text-align: left; margin-left: -260px; }
     .cta-bottom__heading {
-      font-size: clamp(26px, 4vw, 48px);
+      font-size: clamp(26px, 3.4vw, 48px);
       font-weight: 700;
       color: var(--color-heading);
       line-height: 1.25;
       letter-spacing: -0.01em;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     /* ══ FOOTER ══ */
@@ -594,7 +581,7 @@
         top: 65%;
         opacity: 0.5;
       }
-      .cta-bottom__text { max-width: 100%; }
+      .cta-bottom__text { margin-left: 0; }
       .what-defines__circle { display: none; }
       .trait { transform: none !important; }  /* mobile 取消弧形位移，改為左對齊 */
       .cards { grid-template-columns: 1fr; }
@@ -643,7 +630,7 @@
       <div class="how-we-work__grid">
         <div class="how-we-work__content">
           <!-- H1 · 56px / 800 / 1.15 / -0.03em -->
-          <h1 class="how-we-work__heading">How We Work</h1>
+          <h1 class="how-we-work__heading">HOW WE WORK</h1>
           <!-- P · 16px / 400 / 1.75 -->
           <p class="how-we-work__body">
             在 OneAD，我們相信好的成果來自彼此的交流與合作。當團隊願意分享想法、互相支持時，每個人的潛能都能被激發，也能成為激發他人的人。透過這樣正向的成長循環，我們一起把事情做得更好，也與客戶共同創造成功。
@@ -665,7 +652,7 @@
       <div class="what-defines__grid">
         <div>
           <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
-          <h2 class="what-defines__heading">What Defines Us<br>OneAD 人格特質</h2>
+          <h2 class="what-defines__heading">WHAT DEFINES US<br>OneAD 人格特質</h2>
           <p class="what-defines__desc">
             我們相信每一位成員都有獨特的價值。透過共同的信念，我們一起打造充滿創意、實踐與成長動能的工作環境。
           </p>
@@ -719,7 +706,7 @@
   <section class="life">
     <div class="container">
       <!-- H2 · 48px / 700 / 1.25 / -0.01em -->
-      <h2 class="life__heading">Life in OneAD</h2>
+      <h2 class="life__heading">LIFE IN OneAD</h2>
       <!-- P · 16px / 400 / 1.75 -->
       <p class="life__intro">從學習成長、職涯發展到生活福利，我們支持夥伴持續拓展能力與視野。</p>
 
