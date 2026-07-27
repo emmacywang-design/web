@@ -864,8 +864,7 @@
 
             <label for="contactTopic" class="contact__field-label">我想瞭解的主題是<span class="contact__field-required">*(必填)</span></label>
             <select id="contactTopic" class="contact__field" name="topic" required>
-              <option value="" disabled selected>請選取</option>
-              <option value="advertising">投放廣告 / 其他合作</option>
+              <option value="advertising" selected>投放廣告 / 其他合作</option>
               <option value="dealer">成為經銷商</option>
               <option value="publisher">申請網站版位營利</option>
               <option value="tech-support">諮詢廣告系統與版位技術問題</option>
@@ -873,7 +872,7 @@
             </select>
 
             <!-- A. 投放廣告 / 其他合作 -->
-            <div class="contact__topic-group" data-topic="advertising" hidden>
+            <div class="contact__topic-group" data-topic="advertising">
               <input class="contact__field" type="text" name="name" placeholder="姓名*（必填）" data-required>
               <input class="contact__field" type="email" name="email" placeholder="電子信箱*（必填）" data-required>
               <input class="contact__field" type="text" name="company" placeholder="公司名稱*（必填）" data-required>
