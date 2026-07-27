@@ -244,7 +244,8 @@
     .cta-card {
       border-radius: 18px;
       padding: 18px 24px;
-      color: var(--white);
+      color: #595757;
+      background: var(--contact-card-bg);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -252,9 +253,7 @@
       text-align: center;
     }
 
-    .cta-card--gray-1 { background: var(--color-accent); }
-    .cta-card--gray-2 { background: var(--color-accent-hover); }
-    .cta-card--gray-3 { background: var(--color-accent-active); }
+    .cta-card__subtitle { color: var(--gray); }
 
     .cta-card__title {
       font-family: var(--font-family-heading);
@@ -268,33 +267,30 @@
       font-size: 13px;
       font-weight: 500;
       line-height: 1.5;
-      opacity: 0.95;
     }
 
     .cta-card__btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 9px 20px;
-      background: var(--white);
+      padding: 9px 22px;
+      background: var(--color-accent);
       border-radius: var(--radius-pill);
       font-family: var(--font-family-heading);
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.3px;
       line-height: 1;
-      color: var(--color-text-primary);
-      transition: transform var(--duration-fast) var(--easing-standard),
+      color: var(--white);
+      transition: background var(--duration-fast) var(--easing-standard),
+                  transform var(--duration-fast) var(--easing-standard),
                   box-shadow var(--duration-fast) var(--easing-standard);
     }
 
-    .cta-card--gray-1 .cta-card__btn { color: var(--color-accent); }
-    .cta-card--gray-2 .cta-card__btn { color: var(--color-accent-hover); }
-    .cta-card--gray-3 .cta-card__btn { color: var(--color-accent-active); }
-
     .cta-card__btn:hover {
+      background: var(--color-accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 18px rgba(255, 101, 70, 0.25);
     }
 
     .contact__card {
