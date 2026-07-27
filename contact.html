@@ -199,7 +199,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
-      align-items: center;
+      align-items: start;
     }
 
     .contact__intro {
@@ -229,6 +229,70 @@
       line-height: 1.85;
       letter-spacing: normal;
       max-width: 460px;
+    }
+
+    /* CTA cards (left column, below intro) */
+    .contact__cta-cards {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+      max-width: 520px;
+    }
+
+    .cta-card {
+      border-radius: 24px;
+      padding: 28px 32px;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .cta-card--brand { background: var(--color-brand); }
+    .cta-card--accent { background: var(--color-accent); }
+
+    .cta-card__title {
+      font-family: var(--font-family-heading);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-card__subtitle {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .cta-card__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      background: var(--white);
+      border-radius: var(--radius-pill);
+      font-family: var(--font-family-heading);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      line-height: 1;
+      color: var(--color-text-primary);
+      transition: transform var(--duration-fast) var(--easing-standard),
+                  box-shadow var(--duration-fast) var(--easing-standard);
+    }
+
+    .cta-card--brand .cta-card__btn { color: var(--color-brand); }
+    .cta-card--accent .cta-card__btn { color: var(--color-accent); }
+
+    .cta-card__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
     }
 
     .contact__card {
@@ -644,6 +708,24 @@
           <p class="contact__intro-desc">
             OneAD 是一家以 AI 為核心的廣告科技公司，結合 OneDATA 的多維數據智能，打造科技賦能的智慧行銷解決方案，協助品牌行銷人在快速變動的數位環境中持續領先。
           </p>
+
+          <ul class="contact__cta-cards">
+            <li class="cta-card cta-card--brand">
+              <div class="cta-card__title">廣告主</div>
+              <div class="cta-card__subtitle">放大品牌行銷效益</div>
+              <a href="advertiser.html" class="cta-card__btn">了解更多廣告合作資訊</a>
+            </li>
+            <li class="cta-card cta-card--accent">
+              <div class="cta-card__title">經銷商</div>
+              <div class="cta-card__subtitle">攜手拓展市場版圖</div>
+              <a href="#" class="cta-card__btn">了解更多合作流程與效益</a>
+            </li>
+            <li class="cta-card cta-card--brand">
+              <div class="cta-card__title">發布商／技術商</div>
+              <div class="cta-card__subtitle">即刻收穫流量變現力</div>
+              <a href="#" class="cta-card__btn">了解更多合作流程與效益</a>
+            </li>
+          </ul>
         </div>
 
         <div class="contact__card">
