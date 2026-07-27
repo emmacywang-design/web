@@ -345,6 +345,115 @@
       color: var(--color-accent);
     }
 
+    .contact__form-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact__form-header__en {
+      font-family: var(--font-family-heading);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .contact__form-header__zh {
+      font-family: var(--font-family-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: #595757;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .contact__topic-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact__topic-group[hidden] {
+      display: none !important;
+    }
+
+    .contact__field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .contact__field-row--phone {
+      grid-template-columns: 150px 1fr;
+    }
+
+    .contact__field.is-error {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-focus-accent);
+    }
+
+    .contact__field-hint {
+      font-size: 12px;
+      color: var(--color-accent);
+      padding-left: 4px;
+      margin-top: -4px;
+      line-height: 1.4;
+    }
+
+    .contact__terms {
+      background: #f4f4f4;
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.75;
+    }
+
+    .contact__terms__title {
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .contact__terms p + p {
+      margin-top: 8px;
+    }
+
+    .contact__consent {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding-left: 4px;
+      font-size: 13px;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .contact__consent input[type="checkbox"] {
+      margin-top: 2px;
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-accent);
+      cursor: pointer;
+    }
+
+    .contact__consent-desc {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.75;
+      padding-left: 30px;
+      margin-top: -4px;
+    }
+
+    .contact__consent-desc a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
     .contact__field {
       width: 100%;
       padding: 14px 22px;
@@ -748,9 +857,11 @@
         <div class="contact__card">
           <!-- Form (initial state) -->
           <form class="contact__form" id="contactForm" novalidate>
-            <p class="contact__form-intro">
-              請選擇洽詢主題並填寫相關資訊，我們將依據您提供的內容安排對應窗口協助，讓您的需求能更快速地被確認與處理。
-            </p>
+            <div class="contact__form-header">
+              <div class="contact__form-header__en">Contact Us</div>
+              <div class="contact__form-header__zh">聯絡我們</div>
+            </div>
+
             <label for="contactTopic" class="contact__field-label">我想瞭解的主題是<span class="contact__field-required">*(必填)</span></label>
             <select id="contactTopic" class="contact__field" name="topic" required>
               <option value="" disabled selected>請選取</option>
@@ -760,11 +871,145 @@
               <option value="tech-support">諮詢廣告系統與版位技術問題</option>
               <option value="superdsp">諮詢 SuperDSP 服務</option>
             </select>
-            <input class="contact__field" type="text" name="name" placeholder="姓名（必填）*" required>
-            <input class="contact__field" type="email" name="email" placeholder="電子信箱（必填）*" required>
-            <input class="contact__field" type="text" name="company" placeholder="公司名稱（必填）*" required>
-            <input class="contact__field" type="text" name="need" placeholder="您的需要（必填）*" required>
-            <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
+
+            <!-- A. 投放廣告 / 其他合作 -->
+            <div class="contact__topic-group" data-topic="advertising" hidden>
+              <input class="contact__field" type="text" name="name" placeholder="姓名*（必填）" data-required>
+              <input class="contact__field" type="email" name="email" placeholder="電子信箱*（必填）" data-required>
+              <input class="contact__field" type="text" name="company" placeholder="公司名稱*（必填）" data-required>
+              <select class="contact__field" name="need" data-required>
+                <option value="" disabled selected>您的需要*（必填）</option>
+                <option value="投放廣告">我們想投放廣告</option>
+                <option value="行銷合作">行銷合作與活動邀約</option>
+                <option value="其他">其他</option>
+              </select>
+              <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
+              <label class="contact__consent">
+                <input type="checkbox" name="subscribe" checked>
+                <span>我同意接收 OneAD 的最新消息（預設勾選）</span>
+              </label>
+              <p class="contact__consent-desc">
+                你可以隨時取消訂閱這些通訊。若要進一步了解如何取消訂閱、我們處理隱私的做法、我們如何致力保護和尊重你的隱私，請檢閱我們的《<a href="#">隱私權政策</a>》
+              </p>
+            </div>
+
+            <!-- B. 成為經銷商 -->
+            <div class="contact__topic-group" data-topic="dealer" hidden>
+              <input class="contact__field" type="text" name="name" placeholder="姓名*（必填）" data-required>
+              <input class="contact__field" type="email" name="email" placeholder="電子信箱*（必填）" data-required>
+              <input class="contact__field" type="text" name="company" placeholder="公司名稱*（必填）" data-required>
+              <textarea class="contact__field" name="message" placeholder="訊息內容"></textarea>
+              <label class="contact__consent">
+                <input type="checkbox" name="subscribe" checked>
+                <span>我同意接收 OneAD 的最新消息（預設勾選）</span>
+              </label>
+              <p class="contact__consent-desc">
+                你可以隨時取消訂閱這些通訊。若要進一步了解如何取消訂閱、我們處理隱私的做法、我們如何致力保護和尊重你的隱私，請檢閱我們的《<a href="#">隱私權政策</a>》
+              </p>
+            </div>
+
+            <!-- C. 申請網站版位營利 -->
+            <div class="contact__topic-group" data-topic="publisher" hidden>
+              <label class="contact__field-label">註冊登入帳號<span class="contact__field-required">*（必填）</span></label>
+              <input class="contact__field" type="email" name="account" placeholder="請輸入 Email" data-required>
+
+              <label class="contact__field-label">聯絡人姓名<span class="contact__field-required">*（必填）</span></label>
+              <div class="contact__field-row">
+                <input class="contact__field" type="text" name="last-name" placeholder="請輸入姓氏" data-required>
+                <input class="contact__field" type="text" name="first-name" placeholder="請輸入名字" data-required>
+              </div>
+
+              <label class="contact__field-label">聯絡人手機號碼<span class="contact__field-required">*（必填）</span></label>
+              <div class="contact__field-row contact__field-row--phone">
+                <select class="contact__field" name="country-code" data-required>
+                  <option value="+886" selected>台灣（+886）</option>
+                  <option value="+852">香港（+852）</option>
+                  <option value="+853">澳門（+853）</option>
+                  <option value="+86">中國（+86）</option>
+                  <option value="+81">日本（+81）</option>
+                  <option value="+82">韓國（+82）</option>
+                  <option value="+65">新加坡（+65）</option>
+                  <option value="+60">馬來西亞（+60）</option>
+                </select>
+                <input class="contact__field" type="tel" name="phone" placeholder="請輸入手機號碼" data-required>
+              </div>
+
+              <label class="contact__field-label">網站中文名稱<span class="contact__field-required">*（必填）</span></label>
+              <input class="contact__field" type="text" name="site-name-zh" placeholder="請輸入網站中文名稱" data-required>
+
+              <label class="contact__field-label">網站網址<span class="contact__field-required">*（必填）</span></label>
+              <input class="contact__field" type="url" name="site-url" placeholder="請輸入網站網址" data-required>
+
+              <label class="contact__field-label">網站類別<span class="contact__field-required">*（必填）</span></label>
+              <select class="contact__field" name="site-category" data-required>
+                <option value="" disabled selected>請選擇網站類別</option>
+                <option value="news">新聞媒體</option>
+                <option value="tech">科技資訊</option>
+                <option value="fashion">時尚美妝</option>
+                <option value="lifestyle">生活風格</option>
+                <option value="finance">財經理財</option>
+                <option value="parenting">親子教育</option>
+                <option value="travel">旅遊美食</option>
+                <option value="entertainment">娛樂影視</option>
+                <option value="sports">運動體育</option>
+                <option value="other">其他</option>
+              </select>
+
+              <div class="contact__terms">
+                <div class="contact__terms__title">OneAD® 廣告服務平台約定條款</div>
+                <p>感謝您申請加入「果實夥伴股份有限公司」之「OneAD® 廣告服務平台」（以下簡稱本服務），您同意並願意共同遵守以下契約條款之約定。</p>
+                <p>本條款中的用語定義如下：「您」意指使用本服務的個人或公司；「本服務」意指「OneAD® 廣告服務平台」提供之服務內容；「本公司」意指「果實夥伴股份有限公司」；「雙方」係指您和「OneAD® 廣告服務平台」雙方。</p>
+              </div>
+
+              <label class="contact__consent">
+                <input type="checkbox" name="agree-terms" data-required>
+                <span>勾選表示同意合作契約書內容</span>
+              </label>
+            </div>
+
+            <!-- D. 諮詢廣告系統與版位技術問題 -->
+            <div class="contact__topic-group" data-topic="tech-support" hidden>
+              <label class="contact__field-label">聯絡人姓名<span class="contact__field-required">*（必填）</span></label>
+              <div class="contact__field-row">
+                <input class="contact__field" type="text" name="last-name" placeholder="請輸入姓氏" data-required>
+                <input class="contact__field" type="text" name="first-name" placeholder="請輸入名字" data-required>
+              </div>
+
+              <label class="contact__field-label">請輸入電子信箱<span class="contact__field-required">*（必填）</span></label>
+              <input class="contact__field" type="email" name="email" placeholder="請輸入 Email" data-required>
+
+              <label class="contact__field-label">聯絡人手機號碼</label>
+              <div class="contact__field-row contact__field-row--phone">
+                <select class="contact__field" name="country-code">
+                  <option value="+886" selected>台灣（+886）</option>
+                  <option value="+852">香港（+852）</option>
+                  <option value="+853">澳門（+853）</option>
+                  <option value="+86">中國（+86）</option>
+                  <option value="+81">日本（+81）</option>
+                  <option value="+82">韓國（+82）</option>
+                  <option value="+65">新加坡（+65）</option>
+                  <option value="+60">馬來西亞（+60）</option>
+                </select>
+                <input class="contact__field" type="tel" name="phone" placeholder="請輸入手機號碼">
+              </div>
+
+              <label class="contact__field-label">網站中文名稱</label>
+              <input class="contact__field" type="text" name="site-name-zh" placeholder="請輸入網站中文名稱">
+
+              <label class="contact__field-label">網站網址<span class="contact__field-required">*（必填）</span></label>
+              <input class="contact__field" type="url" name="site-url" placeholder="請輸入網站網址" data-required>
+
+              <textarea class="contact__field" name="message" placeholder="訊息內容*（必填）" style="min-height:180px;" data-required></textarea>
+            </div>
+
+            <!-- E. 諮詢 SuperDSP 服務(暫用通用結構,待羅小姐提供稿件) -->
+            <div class="contact__topic-group" data-topic="superdsp" hidden>
+              <input class="contact__field" type="text" name="name" placeholder="姓名*（必填）" data-required>
+              <input class="contact__field" type="email" name="email" placeholder="電子信箱*（必填）" data-required>
+              <input class="contact__field" type="text" name="company" placeholder="公司名稱*（必填）" data-required>
+              <textarea class="contact__field" name="message" placeholder="訊息內容*（必填）" data-required></textarea>
+            </div>
+
             <div class="contact__submit-row">
               <button type="submit" class="btn btn--accent">送出資料</button>
             </div>
@@ -834,20 +1079,63 @@
       });
     });
 
-    // Contact form submit -> show success
+    // Contact form: topic-based group switching + validation
     const form = document.getElementById('contactForm');
     const success = document.getElementById('contactSuccess');
+    const topicSelect = document.getElementById('contactTopic');
+    const topicGroups = form.querySelectorAll('.contact__topic-group');
+
+    function clearErrors() {
+      form.querySelectorAll('.contact__field.is-error').forEach(f => f.classList.remove('is-error'));
+      form.querySelectorAll('.contact__field-hint').forEach(h => h.remove());
+    }
+
+    function showFieldError(field) {
+      field.classList.add('is-error');
+      const hint = document.createElement('p');
+      hint.className = 'contact__field-hint';
+      hint.textContent = '請填寫此必填欄位';
+      const anchor = field.closest('.contact__field-row') || field;
+      anchor.parentNode.insertBefore(hint, anchor.nextSibling);
+    }
+
+    topicSelect.addEventListener('change', () => {
+      clearErrors();
+      const value = topicSelect.value;
+      topicGroups.forEach(g => {
+        g.hidden = g.dataset.topic !== value;
+      });
+    });
+
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      // 簡易必填檢查
-      const required = form.querySelectorAll('[required]');
-      for (const field of required) {
-        if (!field.value.trim()) {
-          field.focus();
-          field.classList.add('is-focus');
-          return;
+      clearErrors();
+
+      if (!topicSelect.value) {
+        showFieldError(topicSelect);
+        topicSelect.focus();
+        return;
+      }
+
+      const activeGroup = form.querySelector(`.contact__topic-group[data-topic="${topicSelect.value}"]`);
+      if (!activeGroup) return;
+
+      const requiredFields = activeGroup.querySelectorAll('[data-required]');
+      let firstError = null;
+      for (const field of requiredFields) {
+        const isEmpty = field.type === 'checkbox'
+          ? !field.checked
+          : !field.value.trim();
+        if (isEmpty) {
+          showFieldError(field);
+          if (!firstError) firstError = field;
         }
       }
+      if (firstError) {
+        firstError.focus();
+        return;
+      }
+
       form.hidden = true;
       success.hidden = false;
       document.querySelector('.contact__card').classList.add('is-success');
