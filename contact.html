@@ -252,9 +252,9 @@
       text-align: center;
     }
 
-    .cta-card--gray-1 { background: #595757; }
-    .cta-card--gray-2 { background: #7C7C7C; }
-    .cta-card--gray-3 { background: #9A9A9A; }
+    .cta-card--gray-1 { background: var(--color-accent); }
+    .cta-card--gray-2 { background: var(--color-accent-hover); }
+    .cta-card--gray-3 { background: var(--color-accent-active); }
 
     .cta-card__title {
       font-family: var(--font-family-heading);
@@ -288,9 +288,9 @@
                   box-shadow var(--duration-fast) var(--easing-standard);
     }
 
-    .cta-card--gray-1 .cta-card__btn { color: #595757; }
-    .cta-card--gray-2 .cta-card__btn { color: #7C7C7C; }
-    .cta-card--gray-3 .cta-card__btn { color: #9A9A9A; }
+    .cta-card--gray-1 .cta-card__btn { color: var(--color-accent); }
+    .cta-card--gray-2 .cta-card__btn { color: var(--color-accent-hover); }
+    .cta-card--gray-3 .cta-card__btn { color: var(--color-accent-active); }
 
     .cta-card__btn:hover {
       transform: translateY(-2px);
@@ -433,12 +433,36 @@
     }
 
     .contact__consent input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
       margin-top: 2px;
       flex-shrink: 0;
-      width: 16px;
-      height: 16px;
-      accent-color: var(--color-accent);
+      width: 18px;
+      height: 18px;
+      border: 2px solid #c9c9c9;
+      border-radius: 4px;
+      background: var(--white);
       cursor: pointer;
+      position: relative;
+      transition: background var(--duration-fast) var(--easing-standard),
+                  border-color var(--duration-fast) var(--easing-standard);
+    }
+
+    .contact__consent input[type="checkbox"]:checked {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .contact__consent input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0px;
+      width: 5px;
+      height: 10px;
+      border: solid var(--white);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
 
     .contact__consent-desc {
