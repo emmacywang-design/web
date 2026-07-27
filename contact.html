@@ -330,6 +330,21 @@
       gap: 12px;
     }
 
+    .contact__field-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: -6px;
+      padding-left: 4px;
+      line-height: 1.4;
+    }
+
+    .contact__field-required {
+      margin-left: 2px;
+      color: var(--color-accent);
+    }
+
     .contact__field {
       width: 100%;
       padding: 14px 22px;
@@ -736,13 +751,14 @@
             <p class="contact__form-intro">
               請選擇洽詢主題並填寫相關資訊，我們將依據您提供的內容安排對應窗口協助，讓您的需求能更快速地被確認與處理。
             </p>
-            <select class="contact__field" name="topic" required>
-              <option value="" disabled selected>我想瞭解的主題是</option>
-              <option value="advertising">廣告投放與策略</option>
-              <option value="media">媒體合作</option>
-              <option value="tech">技術整合</option>
-              <option value="partnership">成為合作夥伴</option>
-              <option value="other">其他</option>
+            <label for="contactTopic" class="contact__field-label">我想瞭解的主題是<span class="contact__field-required">*(必填)</span></label>
+            <select id="contactTopic" class="contact__field" name="topic" required>
+              <option value="" disabled selected>請選取</option>
+              <option value="advertising">投放廣告 / 其他合作</option>
+              <option value="dealer">成為經銷商</option>
+              <option value="publisher">申請網站版位營利</option>
+              <option value="tech-support">諮詢廣告系統與版位技術問題</option>
+              <option value="superdsp">諮詢 SuperDSP 服務</option>
             </select>
             <input class="contact__field" type="text" name="name" placeholder="姓名（必填）*" required>
             <input class="contact__field" type="email" name="email" placeholder="電子信箱（必填）*" required>
